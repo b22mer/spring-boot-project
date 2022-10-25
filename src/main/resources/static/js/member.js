@@ -4,7 +4,7 @@ document.querySelector("#loginBtn").addEventListener("click", async () => {
 
     let data = JSON.stringify({id, pw});
     console.log(data);
-    data = await fetch("login", {method: "POST", body: data});
+    data = await fetch("login", {method: "POST", body: data, headers: {'Content-Type': 'application/json'}});
     data = await data.text();
     alert(data);
 });
