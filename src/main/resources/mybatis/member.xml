@@ -13,14 +13,14 @@
         <result property="phoneNumber" column="phone_number"/>
     </resultMap>
 
-    <select id="login" resultType="String" parameterType="member">
+    <select id="login" resultType="Member" parameterType="map">
         select *
         from member
         where id = #{id}
           and pw = #{pw};
     </select>
 
-    <insert id="register" parameterType="member">
+    <insert id="register" parameterType="Member">
         insert into member (name, position, id, pw, email, phone_number)
         values (#{ name}, #{ position}, #{id}, #{pw}, #{email}, #{phoneNumber})
     </insert>

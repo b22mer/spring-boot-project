@@ -8,4 +8,10 @@
         insert into SecurityVO (userId, uuid, salt)
         values (#{userId}, #{uuid}, #{salt})
     </insert>
+
+    <select id="selectByUserId" resultType="SecVO" parameterType="String">
+        select *
+        from SecurityVO
+        where userId = #{userId}
+    </select>
 </mapper>
