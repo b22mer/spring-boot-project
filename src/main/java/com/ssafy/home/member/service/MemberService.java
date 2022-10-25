@@ -23,8 +23,13 @@ public class MemberService {
         return memberMapper.login(member);
     }
 
+    /**
+     *
+     * @param member
+     */
     public void register(Member member) {
         try {
+            // 사용자 정보 암호화
             byte[] key = CipherUtil.generateKey("AES", 128);
             SecVO secVO = new SecVO();
             secVO.setSalt(CipherUtil.byteArrayToHex(key));
