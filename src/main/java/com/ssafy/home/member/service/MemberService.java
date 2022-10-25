@@ -8,6 +8,8 @@ import com.ssafy.home.util.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -19,12 +21,16 @@ public class MemberService {
     SecurityMapper securityMapper;
 
 
-    public String login(Member member) {
-        return memberMapper.login(member);
+    public Member login(Member member) {
+        SecVO secVO = securityMapper.selectByUserId(member.getId());
+        String hashedPassword = new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt()));
+        Map<String, String> map = new HashMap<>();
+        map.put("id", member.getId());
+        map.put("pw", hashedPassword);
+        return memberMapper.login(map);
     }
 
     /**
-     *
      * @param member
      */
     public void register(Member member) {

@@ -35,5 +35,24 @@
 </article>
 
 </body>
-<script type="text/javascript" src="/js/member.js"></script>
+<%--<script type="text/javascript" src="/js/member.js"></script>--%>
+<script type="text/javascript">
+    document.querySelector("#loginBtn").addEventListener("click", async () => {
+        let id = document.querySelector("#loginId").value;
+        let pw = document.querySelector("#loginPw").value;
+
+        let data = {
+            method: "POST",
+            body: JSON.stringify({id, pw}),
+            headers: {"Content-Type": "application/json"},
+        }
+
+        console.log(data);
+        data = await fetch("login", data);
+        data = await data.text();
+        data = JSON.parse(data);
+
+        alert(data.name);
+    });
+</script>
 </html>

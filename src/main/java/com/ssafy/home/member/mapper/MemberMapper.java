@@ -3,8 +3,11 @@ package com.ssafy.home.member.mapper;
 import com.ssafy.home.member.dto.Member;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 @Mapper
 public interface MemberMapper {
-    String login(Member member);
+    Member login(Map<String, String> map);
+
     void register(Member member);
 }
