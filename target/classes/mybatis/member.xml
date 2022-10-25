@@ -4,6 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.home.member.mapper.MemberMapper">
+    <resultMap id="memberDto" type="member">
+        <result property="name" column="name"/>
+        <result property="position" column="position"/>
+        <result property="id" column="id"/>
+        <result property="pw" column="pw"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+    </resultMap>
+
     <select id="login" resultType="String" parameterType="member">
         select *
         from member
@@ -11,4 +20,8 @@
           and pw = #{pw};
     </select>
 
+    <insert id="register" parameterType="member">
+        insert into member (name, position, id, pw, email, phone_number)
+        values (#{ name}, #{ position}, #{id}, #{pw}, #{email}, #{phoneNumber})
+    </insert>
 </mapper>

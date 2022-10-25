@@ -15,7 +15,7 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping("/login")
-    public String login(Member member, HttpServletRequest request) {
+    public String login() {
         return "user/login";
     }
 
@@ -26,8 +26,16 @@ public class MemberController {
     }
 
     @GetMapping("/register")
-    public String register(Member member) {
+    public String register() {
         return "user/register";
+    }
+
+    @PostMapping("/register")
+    @ResponseBody
+    public String register(@RequestBody Member member) {
+        System.out.println(member.getId());
+        memberService.register(member);
+        return "register ok";
     }
 
 }
