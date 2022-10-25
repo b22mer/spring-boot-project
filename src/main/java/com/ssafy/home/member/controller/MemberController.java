@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/user")
@@ -21,9 +24,15 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String login(@RequestBody Member member) {
+    public Member login(@RequestBody Member member, HttpServletRequest req) {
         // 로그인 프로세스 추가
-        return memberService.login(member);
+        Member m = memberService.login(member);
+        if (m != null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("member", m);
+            return m;
+        }
+        return null;
     }
 
     @GetMapping("/register")

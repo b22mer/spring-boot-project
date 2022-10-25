@@ -66,7 +66,7 @@
 
 </body>
 <%--<script type="text/javascript" src="/js/member.js"></script>--%>
-<script>
+<script type="text/javascript">
     document.querySelector("#registerBtn").addEventListener("click", async () => {
         let name = document.querySelector("#name").value;
         let position = document.querySelector("#position").value;
