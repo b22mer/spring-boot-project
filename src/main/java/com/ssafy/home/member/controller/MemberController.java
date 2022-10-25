@@ -18,6 +18,7 @@ public class MemberController {
         return "user/login";
     }
 
+
     @PostMapping("/login")
     @ResponseBody
     public String login(@RequestBody Member member) {
