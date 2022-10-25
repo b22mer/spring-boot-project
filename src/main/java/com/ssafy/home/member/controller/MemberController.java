@@ -21,6 +21,7 @@ public class MemberController {
     @PostMapping("/login")
     @ResponseBody
     public String login(@RequestBody Member member) {
+        // 로그인 프로세스 추가
         return memberService.login(member);
     }
 
