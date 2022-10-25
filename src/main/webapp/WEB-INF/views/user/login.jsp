@@ -15,7 +15,7 @@
 <article class="container">
     <div class="page-header">
         <div class="col-md-6 col-md-offset-3">
-            <h3>회원가입 Form</h3>
+            <h3>로그인</h3>
         </div>
     </div>
     <div class="col-sm-6 col-md-offset-3">
