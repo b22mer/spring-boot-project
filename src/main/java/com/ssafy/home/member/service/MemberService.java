@@ -13,4 +13,8 @@ public class MemberService {
     public String login(Member member) {
         return memberMapper.login(member);
     }
+
+    public void register(Member member) {
+         memberMapper.register(member);
+    }
 }
