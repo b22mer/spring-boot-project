@@ -1,6 +1,7 @@
 package com.ssafy.home.aop;
 
 import com.ssafy.home.error.ErrorResponse;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.sql.SQLSyntaxErrorException;
 
 @ControllerAdvice
-public class UserExceptionHandler {
+public class GlobalExceptionHandler {
+
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ErrorResponse> NullPointerException(NullPointerException n) {
+        n.printStackTrace();
         ErrorResponse response = new ErrorResponse(404, n.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -26,7 +29,7 @@ public class UserExceptionHandler {
 
     @ExceptionHandler(BadSqlGrammarException.class)
     public ResponseEntity<ErrorResponse> BadSqlGrammarException(BadSqlGrammarException b) {
-        System.out.println("bad grammar");
+        b.printStackTrace();
         ErrorResponse response = new ErrorResponse(404, b.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -41,6 +44,12 @@ public class UserExceptionHandler {
     public String RuntimeException(RuntimeException r) {
         System.out.println("run time exception");
         return "run time exception";
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> NotFoundException(NotFoundException n) {
+        ErrorResponse response = new ErrorResponse(404, n.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
 }
