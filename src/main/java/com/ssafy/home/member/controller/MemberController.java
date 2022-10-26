@@ -41,9 +41,15 @@ public class MemberController {
 
     @PostMapping("/register")
     @ResponseBody
-    public String register(@RequestBody Member member) {
+    public String register(@RequestBody Member member) throws Exception {
         System.out.println(member.getId());
         memberService.register(member);
         return "register ok";
+    }
+
+    @GetMapping("/info")
+    public String info() {
+        System.out.println("user info");
+        return "user/info";
     }
 }

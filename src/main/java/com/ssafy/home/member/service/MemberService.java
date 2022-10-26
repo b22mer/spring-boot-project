@@ -8,6 +8,7 @@ import com.ssafy.home.util.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -33,24 +34,19 @@ public class MemberService {
         return user;
     }
 
-    /**
-     * @param member
-     */
-    public void register(Member member) {
-        try {
-            // 사용자 정보 암호화
-            byte[] key = CipherUtil.generateKey("AES", 128);
-            SecVO secVO = new SecVO();
-            secVO.setSalt(CipherUtil.byteArrayToHex(key));
-            secVO.setUuid(UUID.randomUUID().toString());
-            secVO.setUserId(member.getId());
-            securityMapper.insertSecurity(secVO);
 
-            member.setName(CipherUtil.aesEncrypt(member.getName(), key));
-            member.setPw(new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt())));
-            memberMapper.register(member);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void register(Member member) throws Exception {
+        // 사용자 정보 암호화
+        byte[] key = CipherUtil.generateKey("AES", 128);
+        SecVO secVO = new SecVO();
+        secVO.setSalt(CipherUtil.byteArrayToHex(key));
+        secVO.setUuid(UUID.randomUUID().toString());
+        secVO.setUserId(member.getId());
+        securityMapper.insertSecurity(secVO);
+
+        member.setName(CipherUtil.aesEncrypt(member.getName(), key));
+        member.setPw(new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt())));
+        memberMapper.register(member);
+
     }
 }
