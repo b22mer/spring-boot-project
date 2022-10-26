@@ -5,9 +5,11 @@ import com.ssafy.home.member.mapper.MemberMapper;
 import com.ssafy.home.security.mapper.SecurityMapper;
 import com.ssafy.home.security.dto.SecVO;
 import com.ssafy.home.util.CipherUtil;
+import com.ssafy.home.util.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -21,7 +23,7 @@ public class MemberService {
     SecurityMapper securityMapper;
 
 
-    public Member login(Member member) {
+    public Member login(Member member)  {
         SecVO secVO = securityMapper.selectByUserId(member.getId());
         String hashedPassword = new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt()));
         Map<String, String> map = new HashMap<>();
@@ -33,21 +35,27 @@ public class MemberService {
     /**
      * @param member
      */
-    public void register(Member member) {
+    public void register(Member member)  {
+        // 사용자 정보 암호화
+        byte[] key = new byte[0];
         try {
-            // 사용자 정보 암호화
-            byte[] key = CipherUtil.generateKey("AES", 128);
-            SecVO secVO = new SecVO();
-            secVO.setSalt(CipherUtil.byteArrayToHex(key));
-            secVO.setUuid(UUID.randomUUID().toString());
-            secVO.setUserId(member.getId());
-            securityMapper.insertSecurity(secVO);
+            key = CipherUtil.generateKey("AES", 128);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        SecVO secVO = new SecVO();
+        secVO.setSalt(CipherUtil.byteArrayToHex(key));
+        secVO.setUuid(UUID.randomUUID().toString());
+        secVO.setUserId(member.getId());
+        securityMapper.insertSecurity(secVO);
 
+        try {
             member.setName(CipherUtil.aesEncrypt(member.getName(), key));
-            member.setPw(new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt())));
-            memberMapper.register(member);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        member.setPw(new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt())));
+        memberMapper.register(member);
+
     }
 }
