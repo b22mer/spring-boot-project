@@ -21,13 +21,16 @@ public class MemberService {
     SecurityMapper securityMapper;
 
 
-    public Member login(Member member) {
+    public Member login(Member member) throws Exception {
         SecVO secVO = securityMapper.selectByUserId(member.getId());
         String hashedPassword = new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt()));
         Map<String, String> map = new HashMap<>();
         map.put("id", member.getId());
         map.put("pw", hashedPassword);
-        return memberMapper.login(map);
+        Member user = memberMapper.login(map);
+        String name = CipherUtil.aesDecrypt(user.getName(), CipherUtil.hexToByteArray(secVO.getSalt()));
+        user.setName(name);
+        return user;
     }
 
     /**
