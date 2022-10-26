@@ -3,6 +3,8 @@ package com.ssafy.home.member.controller;
 import com.ssafy.home.member.dto.Member;
 import com.ssafy.home.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,15 +26,12 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public Member login(@RequestBody Member member, HttpServletRequest req) {
+    public ResponseEntity<Member> login(@RequestBody Member member, HttpServletRequest req) throws Exception {
         // 로그인 프로세스 추가
-        Member m = memberService.login(member);
-        if (m != null) {
-            HttpSession session = req.getSession();
-            session.setAttribute("member", m);
-            return m;
-        }
-        return null;
+        Member user = memberService.login(member);
+        HttpSession session = req.getSession();
+        session.setAttribute("member", user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/register")
@@ -42,9 +41,15 @@ public class MemberController {
 
     @PostMapping("/register")
     @ResponseBody
-    public String register(@RequestBody Member member) {
+    public String register(@RequestBody Member member) throws Exception {
         System.out.println(member.getId());
         memberService.register(member);
         return "register ok";
+    }
+
+    @GetMapping("/info")
+    public String info() {
+        System.out.println("user info");
+        return "user/info";
     }
 }
