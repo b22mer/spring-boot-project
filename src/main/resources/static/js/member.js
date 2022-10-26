@@ -9,6 +9,8 @@ document.querySelector("#loginBtn").addEventListener("click", async () => {
         body: data,
         headers: {"Content-Type": "application/json"},
     });
+
+
     data = await data.text();
 
     // login 창 닫기
