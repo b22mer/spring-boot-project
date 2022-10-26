@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.sql.SQLSyntaxErrorException;
 
 @ControllerAdvice
-public class UserExceptionHandler {
+public class GlobalExceptionHandler {
+
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ErrorResponse> NullPointerException(NullPointerException n) {
+        n.printStackTrace();
         ErrorResponse response = new ErrorResponse(404, n.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -26,7 +28,7 @@ public class UserExceptionHandler {
 
     @ExceptionHandler(BadSqlGrammarException.class)
     public ResponseEntity<ErrorResponse> BadSqlGrammarException(BadSqlGrammarException b) {
-        System.out.println("bad grammar");
+        b.printStackTrace();
         ErrorResponse response = new ErrorResponse(404, b.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
