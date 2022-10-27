@@ -1,4 +1,4 @@
-package com.ssafy.home.controller;
+package com.ssafy.home.main.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
