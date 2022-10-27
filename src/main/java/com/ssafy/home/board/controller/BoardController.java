@@ -8,11 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/board")
 public class BoardController {
     @Autowired
@@ -22,6 +21,11 @@ public class BoardController {
     public ResponseEntity<List<Board>> selectAll() {
         List<Board> list = boardService.selectAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/selectAll")
+    public String list() {
+        return "board/list";
     }
 
 }
