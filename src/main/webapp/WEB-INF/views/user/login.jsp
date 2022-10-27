@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nowgnas
-  Date: 2022/10/25
-  Time: 2:00 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%@include file="../common/head.jsp" %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -35,24 +29,5 @@
 </article>
 
 </body>
-<%--<script type="text/javascript" src="/js/member.js"></script>--%>
-<script type="text/javascript">
-    document.querySelector("#loginBtn").addEventListener("click", async () => {
-        let id = document.querySelector("#loginId").value;
-        let pw = document.querySelector("#loginPw").value;
-
-        let data = {
-            method: "POST",
-            body: JSON.stringify({id, pw}),
-            headers: {"Content-Type": "application/json"},
-        }
-
-        console.log(data);
-        data = await fetch("login", data);
-        data = await data.text();
-        data = JSON.parse(data);
-
-        alert(data.name);
-    });
-</script>
+<%@include file="../common/script.jsp" %>
 </html>
