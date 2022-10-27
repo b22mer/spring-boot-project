@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nowgnas
-  Date: 2022/10/25
-  Time: 2:01 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -14,6 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@include file="../common/head.jsp" %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>회원가입</title>
 </head>
 <body>
@@ -65,25 +59,5 @@
 </article>
 
 </body>
-<%--<script type="text/javascript" src="/js/member.js"></script>--%>
-<script type="text/javascript">
-    document.querySelector("#registerBtn").addEventListener("click", async () => {
-        let name = document.querySelector("#name").value;
-        let position = document.querySelector("#position").value;
-        let id = document.querySelector("#id").value;
-        let pw = document.querySelector("#pw").value;
-        let email = document.querySelector("#email").value;
-        let phoneNumber = document.querySelector("#phoneNumber").value;
-
-        let data = {
-            method: "POST",
-            body: JSON.stringify({name, position, id, pw, email, phoneNumber}),
-            headers: {"Content-Type": "application/json"},
-        };
-
-        data = await fetch("register", data);
-        data = await data.text();
-        alert(data);
-    });
-</script>
+<%@include file="../common/script.jsp" %>
 </html>

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nowgnas
-  Date: 2022/10/25
-  Time: 2:07 PM
-  To change this template use File | Settings | File Templates.
---%>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -12,8 +5,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-<script type="text/javascript" src="js/my.js"></script>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
+
+<!-- Favicons -->
+<link href="/assets/img/favicon2.jpg" rel="icon"/>
+<link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
+
+<!-- Google Fonts -->
+<link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet"
+/>
+
+<!-- Vendor CSS Files -->
+<link href="/assets/vendor/aos/aos.css" rel="stylesheet"/>
+
+<link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+<link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"/>
+<link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"/>
+<link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+
+<!-- Template Main CSS File -->
+<link href="/assets/css/style.css" rel="stylesheet"/>
