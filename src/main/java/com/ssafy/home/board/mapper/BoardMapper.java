@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    public List<Board> selectAll();
+    List<Board> selectAll();
 
-    void writeBoard(WriteBoardDTO board);
+    long writeBoard(WriteBoardDTO board);
 }

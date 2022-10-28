@@ -18,9 +18,9 @@ import java.util.List;
 @Api(tags = {"board"})
 @Controller
 @RequestMapping("/board")
-@RequiredArgsConstructor
+@RequiredArgsConstructor // 생성자 주입
 public class BoardController {
-    private final BoardService boardService;
+    private final BoardService boardService; // 생성자 주입을 위한 처리
 
     @PostMapping("/list")
     @ResponseBody
@@ -35,16 +35,18 @@ public class BoardController {
         return "board/list";
     }
 
-    @GetMapping("/writeboard")
-    public void writeBoardForm() {
-        return;
-    }
-
     @PostMapping("/writeboard")
     public void writeBoard(
             @ApiParam(value = "board")
             @RequestBody WriteBoardDTO board) {
-        boardService.writeBoard(board);
+        System.out.println(board);
+        long res = boardService.writeBoard(board);
+        if (res > 0) {
+            // 정상적으로 저장됨
+            System.out.println("insert success");
+        } else {
+            System.out.println("insert fail");
+        }
 
     }
 
