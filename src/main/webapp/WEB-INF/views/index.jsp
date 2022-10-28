@@ -39,6 +39,8 @@
         <h1>Welcome to <span>whereIsMyHome</span></h1>
         <h2>Your home is my home, so Please give me your home.</h2>
         <div class="d-flex">
+            <a href="#" onclick="window.open('board2/writeForm','_blank','width=500, height=600')">
+                동기-글쓰기</a>
             <a href="#about" class="btn-get-started scrollto">Find Your Home</a>
             <a href="https://www.youtube.com/watch?v=jA0PiCWDc0Q" class="glightbox btn-watch-video"
             ><i class="bi bi-play-circle"></i><span id="video-ment">Check Video</span></a

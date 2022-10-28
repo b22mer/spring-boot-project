@@ -12,7 +12,7 @@
                 <li><a class="nav-link scrollto" href="${root}/user/login"
                        onclick="window.open(this.href, '_blank', 'width=600 height=800'); return false">Login</a></li>
                 <li><a class="nav-link scrollto" href="#team">Logout</a></li>
-                <li><a class="nav-link scrollto" href="/board/list.html">Board</a></li>
+                <li><a class="nav-link scrollto" href="${root}/board/write">Board</a></li>
                 <li class="dropdown">
                     <a href="${root}/user/register"
                        onclick="window.open(this.href, '_blank', 'width=600 height=800'); return false"><span>Register</span>
