@@ -1,5 +1,6 @@
 package com.ssafy.home.member.service;
 
+import com.ssafy.home.member.dto.LoginDTO;
 import com.ssafy.home.member.dto.Member;
 import com.ssafy.home.member.mapper.MemberMapper;
 import com.ssafy.home.security.mapper.SecurityMapper;
@@ -22,7 +23,7 @@ public class MemberService {
     SecurityMapper securityMapper;
 
 
-    public Member login(Member member) throws Exception {
+    public Member login(LoginDTO member) throws Exception {
         SecVO secVO = securityMapper.selectByUserId(member.getId());
         String hashedPassword = new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt()));
         Map<String, String> map = new HashMap<>();

@@ -3,7 +3,11 @@ package com.ssafy.home.board.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ssafy.home.board.dto.Board;
+import com.ssafy.home.board.dto.WriteBoardDTO;
 import com.ssafy.home.board.service.BoardService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Api(tags = {"board"})
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
-    @Autowired
-    BoardService boardService;
+    private final BoardService boardService;
 
     @PostMapping("/list")
     @ResponseBody
@@ -28,6 +33,19 @@ public class BoardController {
     @GetMapping("/selectAll")
     public String list() {
         return "board/list";
+    }
+
+    @GetMapping("/writeboard")
+    public void writeBoardForm() {
+        return;
+    }
+
+    @PostMapping("/writeboard")
+    public void writeBoard(
+            @ApiParam(value = "board")
+            @RequestBody WriteBoardDTO board) {
+        boardService.writeBoard(board);
+
     }
 
 }

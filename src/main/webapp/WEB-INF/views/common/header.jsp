@@ -9,7 +9,7 @@
             <ul>
                 <li><a class="nav-link scrollto" href="deal.html">Deal Info</a></li>
                 <li><a class="nav-link scrollto" href="#portfolio">Company</a></li>
-                <li><a class="nav-link scrollto" href=`${root}/user/login`
+                <li><a class="nav-link scrollto" href="${root}/user/login"
                        onclick="window.open(this.href, '_blank', 'width=600 height=800'); return false">Login</a></li>
                 <li><a class="nav-link scrollto" href="#team">Logout</a></li>
                 <li><a class="nav-link scrollto" href="/board/list.html">Board</a></li>
