@@ -3,10 +3,12 @@ package com.ssafy.home.board.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Schema(description = "게시글 작성")
 @Getter
 @Setter
+@ToString
 public class WriteBoardDTO {
     @Schema(description = "int")
     private int originNo;
