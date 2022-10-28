@@ -19,6 +19,6 @@
 
     <insert id="writeBoard" parameterType="board">
         insert into board (originNo, groupOrd, groupLayer, title, content, writer, reg_datetime)
-        values (#{originNo}, #{groupOrd}, #{groupLayer}, #{title}, #{content}, #{writer}, SYSDATE())
+        values (#{originNo}, #{groupOrd}, 0, #{title}, #{content}, #{writer}, SYSDATE())
     </insert>
 </mapper>

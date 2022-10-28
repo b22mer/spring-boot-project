@@ -18,7 +18,7 @@ public class BoardService {
         return boardMapper.selectAll();
     }
 
-    public void writeBoard(WriteBoardDTO board) {
-        boardMapper.writeBoard(board);
+    public long writeBoard(WriteBoardDTO board) {
+        return boardMapper.writeBoard(board);
     }
 }

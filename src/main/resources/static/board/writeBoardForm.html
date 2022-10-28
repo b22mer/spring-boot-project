@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기창</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <title>글쓰기창</title>
+</head>
+<body>
+<div id="msgDiv"></div>
+<div class="container">
+    <h3 style="text-align:center">글쓰기</h3>
+    <!--js로 요청 하기 board/writeboard로 요청하기 -->
+    <table class="table table-border">
+        <tr>
+            <td> 작성자 :</td>
+            <td colspan=2><input type="text" size="50" maxlength="100"
+                                 id="id" name="writer"
+                                 readonly style="background:lightgray"/></td>
+        </tr>
+        <tr>
+            <td>글제목 :</td>
+            <td colspan="2"><input type="text" size="50" maxlength="300" name="title"/></td>
+        </tr>
+        <tr>
+            <td valign="top"><br>글내용 :</td>
+            <td colspan=2><textarea name="content" rows="10" cols="53" maxlength="4000"></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2">
+                <input type="submit" value="글쓰기" class="btn btn-info"/>
+                <input type=button value="목록보기" onClick="backToList()" class="btn btn-warning"/>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<!--js로 요청 하기 board/writeboard로 요청하기 -->
+<script>
+
+</script>
+</html>
