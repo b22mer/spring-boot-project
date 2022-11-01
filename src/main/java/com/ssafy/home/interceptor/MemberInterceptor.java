@@ -24,7 +24,7 @@ public class MemberInterceptor implements HandlerInterceptor {
                 System.out.println("member null");
                 return false;
             }
-            request.setAttribute("user", member.getName());
+            request.setAttribute("member", member);
             return true;
         }
         response.sendRedirect(request.getContextPath() + "/login");
