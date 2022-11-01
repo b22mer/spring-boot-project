@@ -1,5 +1,6 @@
 package com.ssafy.home.member.controller;
 
+import com.ssafy.home.common.dto.ResponseDTO;
 import com.ssafy.home.member.dto.LoginDTO;
 import com.ssafy.home.member.dto.Member;
 import com.ssafy.home.member.service.MemberService;
@@ -7,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,22 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 @Api(tags = {"users"})
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class MemberController {
-    @Autowired
-    MemberService memberService;
+    private final MemberService memberService;
+
+    @GetMapping("logout")
+    public String logout(HttpServletRequest req) {
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "index";
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -45,16 +54,21 @@ public class MemberController {
             @ApiParam(value = "member")
             @RequestBody LoginDTO member,
             HttpServletRequest req) {
+        ResponseDTO res = new ResponseDTO();
         try {
             // 로그인 프로세스 추가
             Member user = memberService.login(member);
             HttpSession session = req.getSession();
             session.setAttribute("member", user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+
+            res.setStatus("success");
+            res.setMsg("login success");
+            res.setBody(user);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
-            Map<String, String> exception = new HashMap<>();
-            exception.put("msg", "로그인 정보가 잘못되었습니다. 다시 로그인해 주세요");
-            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+            res.setStatus("fail");
+            res.setErrMsg("로그인 정보가 잘못되었습니다. 다시 로그인해 주세요");
+            return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -65,17 +79,42 @@ public class MemberController {
 
     @PostMapping("/register")
     @ResponseBody
-    public String register(@RequestBody Member member) throws Exception {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "사용자 회원가입")
+    })
+    public String register(
+            @ApiParam(value = "member")
+            @RequestBody Member member) throws Exception {
         System.out.println(member.getId());
         memberService.register(member);
         return "register ok";
     }
 
-    @GetMapping("/info")
+    @GetMapping("/info") // 테스트용
     public String info(HttpServletRequest req) {
         System.out.println("user 받기");
         System.out.println(req.getAttribute("user"));
         System.out.println("user info");
         return "user/info";
+    }
+
+    @PostMapping("idchck")
+    @ResponseBody
+    public ResponseEntity<ResponseDTO> idCheck(
+            @ApiParam(value = "userId")
+            @RequestParam String userId) {
+        int isId = memberService.checkId(userId);
+        ResponseDTO res = new ResponseDTO();
+        if (isId > 0) {
+            // id 존재
+            res.setStatus("fail");
+            res.setErrMsg("id가 존재합니다.");
+            return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
+        } else {
+            //id 생성 가능
+            res.setStatus("success");
+            res.setMsg("id는 생성 가능합니다.");
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
     }
 }
