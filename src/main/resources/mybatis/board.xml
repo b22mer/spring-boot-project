@@ -25,19 +25,23 @@
         <result column="save_file" property="saveFile"/>
     </resultMap>
 
-    <insert id="writeArticle" parameterType="boardDto">
-        insert into board (user_id, subject, content, hit, register_time)
+    <resultMap id="fileInfo" type="fileDTO">
+        <result column="uuid" property="uuid"/>
+        <result column="file_name" property="fileName"/>
+        <result column="content_type" property="contentType"/>
+    </resultMap>
+
+    <!--게시글 insert-->
+    <insert id="writeBoard" parameterType="boardDto">
+        insert into board (id, subject, content, hit, register_time)
         values (#{userId}, #{subject}, #{content}, 0, now())
-        <selectKey resultType="int" keyProperty="articleNo" order="AFTER">
-            select last_insert_id()
-        </selectKey>
     </insert>
 
-    <insert id="registerFile" parameterType="boardDto">
-        insert into file_info (article_no, save_folder, original_file, save_file)
-        values
-        <foreach collection="fileInfos" item="fileinfo" separator=" , ">
-            (#{articleNo}, #{fileinfo.saveFolder}, #{fileinfo.originalFile}, #{fileinfo.saveFile})
+    <!--file data 저장 -->
+    <insert id="addFile" parameterType="boardDto">
+        insert into file_data (uuid, file_name, content_type) values
+        <foreach collection="fileInfos" item="file" separator=",">
+            (#{file.uuid}, #{file.fileName}, #{file.contentType})
         </foreach>
     </insert>
 

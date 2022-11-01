@@ -11,7 +11,7 @@ public class BoardDto {
     private String content;
     private int hit;
     private String registerTime;
-    private List<FileInfoDto> fileInfos;
+    private List<FileDTO> fileInfos;
 
     public int getArticleNo() {
         return articleNo;
@@ -69,11 +69,11 @@ public class BoardDto {
         this.registerTime = registerTime;
     }
 
-    public List<FileInfoDto> getFileInfos() {
+    public List<FileDTO> getFileInfos() {
         return fileInfos;
     }
 
-    public void setFileInfos(List<FileInfoDto> fileInfos) {
+    public void setFileInfos(List<FileDTO> fileInfos) {
         this.fileInfos = fileInfos;
     }
 

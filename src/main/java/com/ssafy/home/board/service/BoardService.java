@@ -1,10 +1,11 @@
 package com.ssafy.home.board.service;
 
 import com.ssafy.home.board.dto.BoardDto;
-import com.ssafy.home.board.dto.WriteBoardDTO;
+import com.ssafy.home.board.dto.FileDTO;
 import com.ssafy.home.board.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +18,14 @@ public class BoardService {
         return boardMapper.selectAll();
     }
 
-    public long writeBoard(WriteBoardDTO board) {
-        return boardMapper.writeBoard(board);
+    @Transactional
+    public void writeBoard(BoardDto board) {
+        List<FileDTO> list = board.getFileInfos();
+        if (list!=null && !list.isEmpty()){
+            boardMapper.addFile(board);
+        }
+        System.out.println("file insert success");
+        boardMapper.writeBoard(board);
+        System.out.println("board insert success");
     }
 }

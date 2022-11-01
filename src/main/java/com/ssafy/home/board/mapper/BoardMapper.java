@@ -1,7 +1,7 @@
 package com.ssafy.home.board.mapper;
 
 import com.ssafy.home.board.dto.BoardDto;
-import com.ssafy.home.board.dto.WriteBoardDTO;
+import com.ssafy.home.board.dto.FileDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,5 +10,7 @@ import java.util.List;
 public interface BoardMapper {
     List<BoardDto> selectAll();
 
-    long writeBoard(WriteBoardDTO board);
+    void writeBoard(BoardDto board);
+
+    void addFile(BoardDto boardDto);
 }
