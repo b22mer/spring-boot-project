@@ -1,6 +1,6 @@
 package com.ssafy.home.member.controller;
 
-import com.ssafy.home.dto.ResponseDTO;
+import com.ssafy.home.common.dto.ResponseDTO;
 import com.ssafy.home.member.dto.LoginDTO;
 import com.ssafy.home.member.dto.Member;
 import com.ssafy.home.member.service.MemberService;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 @Api(tags = {"users"})
 @Controller

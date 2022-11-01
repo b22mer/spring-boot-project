@@ -1,4 +1,4 @@
-package com.ssafy.home.dto;
+package com.ssafy.home.common.dto;
 
 import lombok.Data;
 
