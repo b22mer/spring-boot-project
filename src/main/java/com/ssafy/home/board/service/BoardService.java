@@ -21,6 +21,7 @@ public class BoardService {
     @Transactional
     public void writeBoard(BoardDto board) {
         List<FileDTO> list = board.getFileInfos();
+
         if (list!=null && !list.isEmpty()){
             boardMapper.addFile(board);
         }

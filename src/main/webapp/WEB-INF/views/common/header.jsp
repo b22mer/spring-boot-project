@@ -7,6 +7,11 @@
         <!--2-1. í¤ë ë©ë´ì°½ -->
         <nav id="navbar" class="navbar">
             <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"
+                       onclick="window.open('webcam/cameraWeb.html', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=500,width=750,height=400');">#Selfie</a>
+                </li>
+
                 <li><a lass="nav-link scrollto" href="${root}/board/upload">files</a></li>
                 <li><a class="nav-link scrollto" href="deal.html">Deal Info</a></li>
                 <li><a class="nav-link scrollto" href="#portfolio">Company</a></li>
