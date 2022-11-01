@@ -6,8 +6,6 @@
 <head>
     <%@include file="common/head.jsp" %>
     <title>Where is My House</title>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <title>WhereIsMyHome</title>
