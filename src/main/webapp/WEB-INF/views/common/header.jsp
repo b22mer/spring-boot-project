@@ -38,10 +38,17 @@
                 </c:if>
 
 
-
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
         <!--2-1. í¤ë ë©ë´ì°½ end -->
     </div>
 </header>
+<script>
+    document.querySelector("#logoutBtn").addEventListener("click", async () => {
+        let data = {
+            method: "GET"
+        }
+        await fetch("user/logout", data);
+    })
+</script>

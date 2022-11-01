@@ -1,4 +1,4 @@
-package com.ssafy.home.main.controller;
+package com.ssafy.home.common.controller;
 
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;

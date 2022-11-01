@@ -30,7 +30,7 @@ public class BoardController {
         return PageInfo.of(list);
     }
 
-    @GetMapping("/selectAll")
+    @GetMapping("/selectall")
     public String list() {
         return "board/list";
     }
