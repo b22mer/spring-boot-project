@@ -50,7 +50,7 @@ public class MemberController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "로그인 성공")
     })
-    public ResponseEntity<?> login(
+    public ResponseEntity<ResponseDTO> login(
             @ApiParam(value = "member")
             @RequestBody LoginDTO member,
             HttpServletRequest req) {
