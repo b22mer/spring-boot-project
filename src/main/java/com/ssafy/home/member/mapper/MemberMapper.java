@@ -10,4 +10,6 @@ public interface MemberMapper {
     Member login(Map<String, String> map);
 
     void register(Member member);
+
+    int idCheck(String userId);
 }

@@ -1,5 +1,6 @@
 package com.ssafy.home.member.controller;
 
+import com.ssafy.home.dto.ResponseDTO;
 import com.ssafy.home.member.dto.LoginDTO;
 import com.ssafy.home.member.dto.Member;
 import com.ssafy.home.member.service.MemberService;
@@ -71,11 +72,29 @@ public class MemberController {
         return "register ok";
     }
 
-    @GetMapping("/info")
+    @GetMapping("/info") // 테스트용
     public String info(HttpServletRequest req) {
         System.out.println("user 받기");
         System.out.println(req.getAttribute("user"));
         System.out.println("user info");
         return "user/info";
+    }
+
+    @PostMapping("idchck")
+    @ResponseBody
+    public ResponseEntity<ResponseDTO> idCheck(@RequestParam String userId) {
+        int isId = memberService.checkId(userId);
+        ResponseDTO res = new ResponseDTO();
+        if (isId > 0) {
+            // id 존재
+            res.setStatus("fail");
+            res.setErrMsg("id가 존재합니다.");
+            return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
+        } else {
+            //id 생성 가능
+            res.setStatus("success");
+            res.setMsg("id는 생성 가능합니다.");
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
     }
 }

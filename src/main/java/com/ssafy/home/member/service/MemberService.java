@@ -50,4 +50,8 @@ public class MemberService {
         memberMapper.register(member);
 
     }
+
+    public int checkId(String userId) {
+        return memberMapper.idCheck(userId);
+    }
 }
