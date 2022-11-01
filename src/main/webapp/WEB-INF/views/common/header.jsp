@@ -7,6 +7,7 @@
         <!--2-1. í¤ë ë©ë´ì°½ -->
         <nav id="navbar" class="navbar">
             <ul>
+                <li><a lass="nav-link scrollto" href="${root}/board/upload">files</a></li>
                 <li><a class="nav-link scrollto" href="deal.html">Deal Info</a></li>
                 <li><a class="nav-link scrollto" href="#portfolio">Company</a></li>
                 <c:if test="${member eq null}">
@@ -36,11 +37,8 @@
                     </i>
 
                 </c:if>
-
-
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
-        <!--2-1. í¤ë ë©ë´ì°½ end -->
     </div>
 </header>
