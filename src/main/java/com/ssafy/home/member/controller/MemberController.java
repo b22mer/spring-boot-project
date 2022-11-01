@@ -72,7 +72,9 @@ public class MemberController {
     }
 
     @GetMapping("/info")
-    public String info() {
+    public String info(HttpServletRequest req) {
+        System.out.println("user 받기");
+        System.out.println(req.getAttribute("user"));
         System.out.println("user info");
         return "user/info";
     }
