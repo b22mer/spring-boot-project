@@ -20,12 +20,14 @@ public class MemberInterceptor implements HandlerInterceptor {
         if (session != null) {
             Member member = (Member) session.getAttribute("member");
             if (member.getName() == null) {
+                response.sendRedirect(request.getContextPath() + "/login");
                 System.out.println("member null");
                 return false;
             }
+            request.setAttribute("user", member.getName());
             return true;
         }
-        System.out.println("null session");
+        response.sendRedirect(request.getContextPath() + "/login");
         return false;
     }
 }

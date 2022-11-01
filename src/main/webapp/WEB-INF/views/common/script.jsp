@@ -16,14 +16,13 @@
             headers: {"Content-Type": "application/json"},
         }
 
-        console.log(data);
         data = await fetch("login", data);
         data = await data.text();
         data = JSON.parse(data);
         if (data.msg) {
             alert(data.msg);
         } else {
-            alert(data.name + " 님 안녕하세요!!");
+            opener.parent.location.reload();
             window.close();
         }
     });
