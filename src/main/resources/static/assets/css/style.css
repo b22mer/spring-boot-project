@@ -363,13 +363,13 @@ h6 {
 }
 
 @media (max-width: 991px) {
-  .mobile-nav-toggle {
+ /*  .mobile-nav-toggle {
     display: block;
   }
 
   .navbar ul {
     display: none;
-  }
+  } */
 }
 
 .navbar-mobile {
@@ -659,9 +659,9 @@ section {
 }
 
 @media (max-width: 992px) {
-  .breadcrumbs h2 {
+/*   .breadcrumbs h2 {
     margin: 0 0 10px 0;
-  }
+  } */
 }
 
 .breadcrumbs ol {
@@ -1080,9 +1080,9 @@ section {
 }
 
 @media (min-width: 992px) {
-  .testimonials .testimonial-item p {
+/*   .testimonials .testimonial-item p {
     width: 80%;
-  }
+  } */
 }
 
 /*--------------------------------------------------------------
