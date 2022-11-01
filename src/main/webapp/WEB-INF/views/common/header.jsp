@@ -21,20 +21,20 @@
 
                 </c:if>
                 <c:if test="${member ne null}">
-                    <li><a class="nav-link scrollto" href="#team">Logout</a></li>
-                    <li><a class="nav-link scrollto" href="/board/list.html">Board</a></li>
+                    <li><a class="nav-link scrollto" href="/user/logout">Logout</a></li>
+                    <li><a class="nav-link scrollto" href="/board/selectall">Board</a></li>
                     <li><a class="nav-link scrollto" href="/board/list.html">Setting</a></li>
-                     <i class="bi bi-chevron-down">
-                                <li class="dropdown">
-   					 	
-                        <ul>
-                            <li><a href="#">ss</a></li>
-                            <li><a href="#">ss</a></li>
-                            <li><a href="#">ss</a></li>
-                        </ul>
-                    </li>
-                     </i>
-         
+                    <i class="bi bi-chevron-down">
+                        <li class="dropdown">
+
+                            <ul>
+                                <li><a href="#">ss</a></li>
+                                <li><a href="#">ss</a></li>
+                                <li><a href="#">ss</a></li>
+                            </ul>
+                        </li>
+                    </i>
+
                 </c:if>
 
 
@@ -44,11 +44,3 @@
         <!--2-1. í¤ë ë©ë´ì°½ end -->
     </div>
 </header>
-<script>
-    document.querySelector("#logoutBtn").addEventListener("click", async () => {
-        let data = {
-            method: "GET"
-        }
-        await fetch("user/logout", data);
-    })
-</script>

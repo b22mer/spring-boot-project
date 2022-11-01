@@ -25,6 +25,16 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final MemberService memberService;
 
+    @GetMapping("info")
+    @ResponseBody
+    public ResponseEntity<ResponseDTO> userInfo(HttpServletRequest req) {
+        Member member = (Member) req.getAttribute("member");
+        ResponseDTO res = new ResponseDTO();
+        res.setStatus("success");
+        res.setBody(member);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
     @GetMapping("logout")
     public String logout(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
@@ -88,14 +98,6 @@ public class MemberController {
         System.out.println(member.getId());
         memberService.register(member);
         return "register ok";
-    }
-
-    @GetMapping("/info") // 테스트용
-    public String info(HttpServletRequest req) {
-        System.out.println("user 받기");
-        System.out.println(req.getAttribute("user"));
-        System.out.println("user info");
-        return "user/info";
     }
 
     @PostMapping("idchck")

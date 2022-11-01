@@ -12,4 +12,5 @@ public interface MemberMapper {
     void register(Member member);
 
     int idCheck(String userId);
+    Member userInfo(String userId);
 }
