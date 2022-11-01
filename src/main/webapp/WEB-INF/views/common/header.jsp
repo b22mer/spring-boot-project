@@ -21,7 +21,7 @@
 
                 </c:if>
                 <c:if test="${member ne null}">
-                    <li><a class="nav-link scrollto" href="#team">Logout</a></li>
+                    <li><a id="logoutBtn" class="nav-link scrollto" href="#team">Logout</a></li>
                     <li><a class="nav-link scrollto" href="/board/list.html">Board</a></li>
                     <li class="dropdown">
                         <span>관리창</span>
@@ -41,3 +41,11 @@
         <!--2-1. 헤더 메뉴창 end -->
     </div>
 </header>
+<script>
+    document.querySelector("#logoutBtn").addEventListener("click",async ()=>{
+        let data = {
+            method:"GET"
+        }
+        await fetch("user/logout", data);
+    })
+</script>

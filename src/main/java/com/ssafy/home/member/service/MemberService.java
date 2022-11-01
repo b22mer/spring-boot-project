@@ -6,6 +6,7 @@ import com.ssafy.home.member.mapper.MemberMapper;
 import com.ssafy.home.security.mapper.SecurityMapper;
 import com.ssafy.home.security.dto.SecVO;
 import com.ssafy.home.util.CipherUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,10 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
-    @Autowired
-    MemberMapper memberMapper;
-
-    @Autowired
-    SecurityMapper securityMapper;
+    private final MemberMapper memberMapper;
+    private final SecurityMapper securityMapper;
 
 
     public Member login(LoginDTO member) throws Exception {

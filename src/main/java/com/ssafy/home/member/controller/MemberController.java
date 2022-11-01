@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,18 @@ import javax.servlet.http.HttpSession;
 @Api(tags = {"users"})
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class MemberController {
-    @Autowired
-    MemberService memberService;
+    private final MemberService memberService;
+
+    @GetMapping("logout")
+    public String logout(HttpServletRequest req) {
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "index";
+    }
 
     @GetMapping("/login")
     public String login() {
