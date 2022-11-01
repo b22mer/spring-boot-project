@@ -1,13 +1,17 @@
 package com.ssafy.home.interceptor;
 
 import com.ssafy.home.member.dto.Member;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.NotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@Component
 public class MemberInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -16,10 +20,12 @@ public class MemberInterceptor implements HandlerInterceptor {
         if (session != null) {
             Member member = (Member) session.getAttribute("member");
             if (member.getName() == null) {
-                throw new NotFoundException("no validate session");
+                System.out.println("member null");
+                return false;
             }
             return true;
         }
-        throw new NotFoundException("no session in header");
+        System.out.println("null session");
+        return false;
     }
 }

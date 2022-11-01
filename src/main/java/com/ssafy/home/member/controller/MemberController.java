@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Api(tags = {"users"})
 @Controller
@@ -28,21 +30,32 @@ public class MemberController {
         return "user/login";
     }
 
-
+    /**
+     * @param member: 사용자 id, pw
+     * @param req     : request
+     * @return : body
+     * @throws Exception : 암호화 관련 예외 포함
+     */
     @PostMapping("/login")
     @ResponseBody
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "로그인 성공")
     })
-    public ResponseEntity<Member> login(
+    public ResponseEntity<?> login(
             @ApiParam(value = "member")
             @RequestBody LoginDTO member,
-            HttpServletRequest req) throws Exception {
-        // 로그인 프로세스 추가
-        Member user = memberService.login(member);
-        HttpSession session = req.getSession();
-        session.setAttribute("member", user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+            HttpServletRequest req) {
+        try {
+            // 로그인 프로세스 추가
+            Member user = memberService.login(member);
+            HttpSession session = req.getSession();
+            session.setAttribute("member", user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
+            Map<String, String> exception = new HashMap<>();
+            exception.put("msg", "로그인 정보가 잘못되었습니다. 다시 로그인해 주세요");
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/register")
