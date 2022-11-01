@@ -19,8 +19,8 @@
         data = await fetch("login", data);
         data = await data.text();
         data = JSON.parse(data);
-        if (data.msg) {
-            alert(data.msg);
+        if (data.errMsg) {
+            alert(data.errMsg);
         } else {
             opener.parent.location.reload();
             window.close();
