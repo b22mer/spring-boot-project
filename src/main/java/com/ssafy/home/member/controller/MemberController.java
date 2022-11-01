@@ -46,16 +46,21 @@ public class MemberController {
             @ApiParam(value = "member")
             @RequestBody LoginDTO member,
             HttpServletRequest req) {
+        ResponseDTO res = new ResponseDTO();
         try {
             // 로그인 프로세스 추가
             Member user = memberService.login(member);
             HttpSession session = req.getSession();
             session.setAttribute("member", user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+
+            res.setStatus("success");
+            res.setMsg("login success");
+            res.setBody(user);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
-            Map<String, String> exception = new HashMap<>();
-            exception.put("msg", "로그인 정보가 잘못되었습니다. 다시 로그인해 주세요");
-            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+            res.setStatus("fail");
+            res.setErrMsg("로그인 정보가 잘못되었습니다. 다시 로그인해 주세요");
+            return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -66,7 +71,12 @@ public class MemberController {
 
     @PostMapping("/register")
     @ResponseBody
-    public String register(@RequestBody Member member) throws Exception {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "사용자 회원가입")
+    })
+    public String register(
+            @ApiParam(value = "member")
+            @RequestBody Member member) throws Exception {
         System.out.println(member.getId());
         memberService.register(member);
         return "register ok";
@@ -82,7 +92,9 @@ public class MemberController {
 
     @PostMapping("idchck")
     @ResponseBody
-    public ResponseEntity<ResponseDTO> idCheck(@RequestParam String userId) {
+    public ResponseEntity<ResponseDTO> idCheck(
+            @ApiParam(value = "userId")
+            @RequestParam String userId) {
         int isId = memberService.checkId(userId);
         ResponseDTO res = new ResponseDTO();
         if (isId > 0) {
