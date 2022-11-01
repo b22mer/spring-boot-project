@@ -21,6 +21,9 @@ public class MemberService {
     private final MemberMapper memberMapper;
     private final SecurityMapper securityMapper;
 
+    public Member userInfo(String userId) {
+        return memberMapper.userInfo(userId);
+    }
 
     public Member login(LoginDTO member) throws Exception {
         SecVO secVO = securityMapper.selectByUserId(member.getId());

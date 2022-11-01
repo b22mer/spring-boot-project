@@ -13,6 +13,7 @@
         <result property="phoneNumber" column="phone_number"/>
     </resultMap>
 
+    <!--user login-->
     <select id="login" resultType="Member" parameterType="map">
         select *
         from member
@@ -20,13 +21,22 @@
           and pw = #{pw};
     </select>
 
+    <!--user register-->
     <insert id="register" parameterType="Member">
-        insert into member (name, position, id, pw, email, phone_number)
-        values (#{ name}, #{ position}, #{id}, #{pw}, #{email}, #{phoneNumber})
+        insert into member (name, position, id, pw, email, phone_number, admin)
+        values (#{ name}, #{ position}, #{id}, #{pw}, #{email}, #{phoneNumber}, 0)
     </insert>
 
+    <!--user register id check-->
     <select id="idCheck" parameterType="String" resultType="int">
         select count(*)
+        from member
+        where id = #{userId}
+    </select>
+
+    <!--user info-->
+    <select id="userInfo" resultType="String" parameterType="member">
+        select *
         from member
         where id = #{userId}
     </select>
