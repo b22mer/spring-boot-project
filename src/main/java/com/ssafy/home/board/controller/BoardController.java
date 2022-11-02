@@ -37,8 +37,7 @@ public class BoardController {
     }
 
     @PostMapping("upload")
-    @ResponseBody
-    public ResponseEntity<ResponseDTO> upload(
+    public String upload(
             HttpServletRequest req,
             @ApiParam(value = "files")
             @RequestParam MultipartFile[] files,
@@ -62,12 +61,7 @@ public class BoardController {
         }
         boardDto.setFileInfos(list);
         boardService.writeBoard(boardDto);
-        Map<String, List<?>> map = new HashMap<>();
-        res.setStatus("success");
-        map.put("file", list);
-        res.setBody(map);
-        res.setMsg("file upload");
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return "board/list";
     }
 
     @PostMapping("/list")
