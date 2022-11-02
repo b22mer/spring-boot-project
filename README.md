@@ -166,7 +166,7 @@ ErrorResponse로 응답 객체를 만들고 ResponseEntity로 json 형태로 반
 
 웹 서비스의 사용자가 로그인이 되어 있는지 확인하기 위한 interceptor를 구현해 본다. client에서 요청된 url로 넘어가는 과정에서 조건을 충족하는지 확인하는 미들웨어 역할을 한다.
 
-### Interceptor 정의하기 
+### Interceptor 정의하기
 
 ```java
 
@@ -188,8 +188,11 @@ public class WebConfig implements WebMvcConfigurer {
 }
 
 ```
-`WebMvcConfigurer`를 implements하여 addInterceptors를 override한다. Interceptor를 적용할 url 패턴과 제외할 패턴을 지정할 수 있다. 
+
+`WebMvcConfigurer`를 implements하여 addInterceptors를 override한다. Interceptor를 적용할 url 패턴과 제외할 패턴을 지정할 수 있다.
+
 ```java
+
 @Component
 public class MemberInterceptor implements HandlerInterceptor {
     @Override
@@ -211,18 +214,54 @@ public class MemberInterceptor implements HandlerInterceptor {
     }
 }
 ```
-`MemberInterceptor`클래스에 HandlerInterceptor를 implements한다. 3가지의 메서드를 override할 수 있으며, controller의 메서드에 도달하기 전에 동작하는 `preHandler`를 사용한다. 
-session이 존재하면 session에서 로그인 시 저장된 member 객체를 얻어온다. member 객체가 존재하는 경우 request의 속성에 member를 추가해 준다. Controller에서는 HttpServletRequest에서 member 속성을 받아 현재 로그인된 사용자의 정보를 사용할 수 있다. 
-session이 존재하지 않거나 member 객체가 존재하지 않은 경우 로그인을 하도록 한다. 
+
+`MemberInterceptor`클래스에 HandlerInterceptor를 implements한다. 3가지의 메서드를 override할 수 있으며, controller의 메서드에 도달하기 전에
+동작하는 `preHandler`를 사용한다.
+session이 존재하면 session에서 로그인 시 저장된 member 객체를 얻어온다. member 객체가 존재하는 경우 request의 속성에 member를 추가해 준다. Controller에서는
+HttpServletRequest에서 member 속성을 받아 현재 로그인된 사용자의 정보를 사용할 수 있다.
+session이 존재하지 않거나 member 객체가 존재하지 않은 경우 로그인을 하도록 한다.
 
 # WebCam
+
 ![webcam](https://user-images.githubusercontent.com/55802893/199490364-1ae102a2-4123-4929-be1f-f4fe33ee86ea.png)
 
 - header 부분에 `#Selfie`를 클릭하게 되면 위와 같은 웹캡을 사용할 수 있는 모달창이 뜬다.
 
 # 아파트 실거래가 조회
+
 ![](https://user-images.githubusercontent.com/55802893/199491055-b6898682-99cb-46b9-b4e1-41f4d543a991.png)
 
 - 시, 군구, 동, 년도, 월을 선택한 후 `매매정보가져오기`를 클릭하게 되면 아파트 실거래 정보를 얻을 수 있다.
 - 아파트 이름을 클릭하게 되면 해당 아파트의 좌표로 지도가 이동한다.
-- 
+
+# 게시판
+
+## 게시판 목록 조회
+
+![](https://user-images.githubusercontent.com/55802893/199528095-162180ac-76ab-4b7b-8bdd-c5c9ec1549e1.png)
+
+- 사용자들이 작성한 게시판이다. 글을 조회할 때마다 글 번호인 index가 갱신되며 제목, 작성자, 작성 날짜가 보인다.
+
+## 게시글 작성하기
+
+![](https://user-images.githubusercontent.com/55802893/199530508-c8eb62d1-ab49-4182-a4f1-d33bfb980e3f.png)
+![스크린샷 2022-11-03 오전 12 29 57](https://user-images.githubusercontent.com/55802893/199531521-46fb6130-945e-47c0-a8bc-e007eb48ef47.png)
+
+- 게시글의 제목과 내용, 파일을 선택하고 제출을 누르면 게시글이 작성되고 파일은 `resources/static/files`에 저장된다.
+
+## 게시판 상세 보기
+
+![](https://user-images.githubusercontent.com/55802893/199528882-043a1e37-9c02-4f4c-87e0-858e69632633.png)
+
+```java
+@GetMapping("detail/{code}")
+public String detail(@PathVariable String code,HttpServletRequest req){
+        BoardDto boardDto=boardService.select(code);
+        req.setAttribute("detail",boardDto);
+        return"board/detail";
+        }
+```
+
+- 게시판 상세보기 페이지이다. 목록에서는 GET요청으로 글의 id를 query string으로 담아 요청한다.
+- @PathVariable 어노테이션으로 query string 값을 받아 올 수 있다.
+- 상세보기 페이지에서 내용을 수정한 뒤 `제출`을 누르게 되면 게시글의 정보가 수정된다.

@@ -20,6 +20,7 @@
     <h2>글 작성하기</h2>
     <div>
         <form method="put" action="update" enctype="multipart/form-data">
+            <input type="hidden" name="code" value="<%=detail.getCode()%>">
             <div class="m-lg-5 text-start">
                 <h3 class="align-content-start ">Title</h3>
                 <input class="w-100" type="text" name="title" value="<%=detail.getTitle()%>">

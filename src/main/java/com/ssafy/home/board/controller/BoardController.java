@@ -36,9 +36,6 @@ public class BoardController {
             @ApiParam(value = "boardDto")
             BoardDto boardDto
     ) throws IOException {
-        BoardDto reqBoard = (BoardDto) req.getAttribute("detail");
-        reqBoard.setTitle(boardDto.getTitle());
-        reqBoard.setContent(boardDto.getContent());
         List<FileDTO> list = new ArrayList<>();
         for (MultipartFile file :
                 files) {
@@ -51,7 +48,7 @@ public class BoardController {
             file.transferTo(newFileName);
         }
         boardDto.setFileInfos(list);
-        boardService.updateBoard(reqBoard);
+        boardService.updateBoard(boardDto);
         return "board/list";
     }
 
