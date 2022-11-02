@@ -98,7 +98,7 @@
             </div>
         </div>
         <table class="table table-hover text-center mb-5">
-            <tr>
+            <tr style="background-color: rgba(23,11,10,0.22)">
                 <th>아파트이름</th>
                 <th>층</th>
                 <th>면적</th>
@@ -122,7 +122,8 @@
 
 <!--1-2 카카오맵 띄우기ㅏ -->
 <script>
-    var mapContainer = document.getElementById('dealmap'), // 지도를 표시할 div
+
+    let mapContainer = document.getElementById('dealmap'), // 지도를 표시할 div
 
         mapOption = {
             center: new kakao.maps.LatLng(37.5012743, 127.039585), // 지도의 중심좌표
@@ -130,12 +131,27 @@
         };
 
     // 지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+    let map = new kakao.maps.Map(mapContainer, mapOption);
     let date = new Date();
 
-</script>
+    function kakaoMap(lat, lng) {
+        console.log(lat);
+        mapOption = {
+            center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+        let map = new kakao.maps.Map(mapContainer, mapOption);
 
-<script>
+        let markerPosition = new kakao.maps.LatLng(lat, lng);
+
+        let marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+    }
+
     $(document).on("change", "#sido", getGugun);
     $(document).on("change", "#gugun", getDong);
     $(document).on("change", "#dong", selectDong);
@@ -231,16 +247,12 @@
                 console.log(item.lat);
                 houseDealInfoListTable +=
                     `<tr>
-                        <th>\${item.apartmentName}</th>
+                        <th><a href="#" " onclick="kakaoMap('\${item.lat}', '\${item.lng}')">\${item.apartmentName}</a></th>
                         <th>\${item.floor}</th>
                         <th>\${item.area}</th>
                         <th>\${item.roadName}</th>
                         <th>\${item.dong}</th>
                         <th>\${item.dealAmount}</th>
-
-
-
-
                       </tr>`
             }
             $("#aptlist").html(houseDealInfoListTable);
