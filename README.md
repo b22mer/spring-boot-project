@@ -37,18 +37,32 @@
 
         로그인 상태로 현재 회원정보확인을 할수있는 "info" 탭을 누르게되면 현재 세션이 로그인되어있는 회원의 정보가 출력된다.
 
+        
+    ![회원정보확인-1](https://user-images.githubusercontent.com/74225835/199532797-16169ab8-d747-436b-b314-4633908ba633.PNG)
+
 - 회원정보 수정
 
         위에서 띄운 각 회원정보란의 입력과 삭제를 통하여 회원의 정보를 수정할 수 있다. id는 readonly처리를 통하여 변경할수없도록 설정되었다.
 
+    ![회원정보수정 -2](https://user-images.githubusercontent.com/74225835/199533066-2f8555b3-8d70-413d-8e76-edd550a94617.PNG)
+    ![회원수정완료- 3](https://user-images.githubusercontent.com/74225835/199533079-fca18a5a-41d0-4e8e-b2e6-a49855d28a3b.PNG)
+
+
 - 회원정보 삭제
 
         회원탈퇴 버튼을 클릭하게되면 현재 세션에 로그인되어있는 id 값을 토대로 회원의 정보를 삭제하게된다. 현재 회원의 정보를 삭제한것이기에 회원정보 삭제뿐만 아니라 현재 로그인 되어있는 세션을 종료처리해주어 자동으로 로그아웃 하도록 설정되었다.
+    
+    ![디비 전 -4](https://user-images.githubusercontent.com/74225835/199533533-2ed5ec4c-1a57-40c8-8e9e-6b05a899f19b.PNG)
+    ![탈퇴 후 -5](https://user-images.githubusercontent.com/74225835/199533555-06abe774-0cd8-4c73-a4e1-aaf046177cb2.PNG)
+    ![탈퇴후 디비 -6](https://user-images.githubusercontent.com/74225835/199533567-5f981bdf-0567-47fb-9941-a22b58656c2e.PNG)
 
 - 회원등록 기능
 
         register 버튼을 통하여 서브탭이 팝업되며 해당 회원가입팝업에서 성명, 포지션, ID, 비밀번호와 이메일 그리고 전화번호를 기준으로 회원가입을 진행한다. 이미 이전에 가입한 이력이 있는 ID(이미 DB에 존재하는 ID)는 중복검사를 통하여 확인한다. 중복되는 아이디일 경우에는 회원가입이 되지 않도록 설정을 했다.
 
+    ![회원등록 입력 -7](https://user-images.githubusercontent.com/74225835/199534296-79ae732d-584c-4b11-97c3-de721a6dd49f.PNG)
+    ![회원등록 완료 -8](https://user-images.githubusercontent.com/74225835/199534310-a9535ee6-73fc-44fb-85a5-e404df5df4f6.PNG)
+    ![등록히 디비 -9](https://user-images.githubusercontent.com/74225835/199534321-c2c0a23a-8aa9-44b6-bafe-5421837da173.PNG)
 
 
 ### 2. 메인페이지 (실거래 페이지)
