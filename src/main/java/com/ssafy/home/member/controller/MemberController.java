@@ -41,7 +41,10 @@ public class MemberController {
         if (session != null) {
             session.invalidate();
         }
+
         return "index";
+        
+        
     }
 
     @GetMapping("/login")

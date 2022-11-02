@@ -11,6 +11,5 @@ public interface BoardMapper {
     List<BoardDto> selectAll();
 
     void writeBoard(BoardDto board);
-
     void addFile(BoardDto boardDto);
 }
