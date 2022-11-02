@@ -9,7 +9,7 @@
             <ul>
                 <li class="nav-item">
                     <a class="nav-link" href="#"
-                       onclick="window.open('webcam/cameraWeb.html', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=500,width=750,height=400');">#Selfie</a>
+                       onclick="window.open('${root}/webcam/cameraWeb.html', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=500,width=750,height=400');">#Selfie</a>
                 </li>
 
                 <li><a class="nav-link scrollto" href="${root}/board/upload">files</a></li>
@@ -27,7 +27,7 @@
 
                 </c:if>
                 <c:if test="${member ne null  }">
-                    <li><a class="nav-link scrollto" href="/user/logout">Logout</a></li>
+                    <li><a class="nav-link scrollto" id="logoutBtn" href="#">Logout</a></li>
                     <li><a class="nav-link scrollto" href="/board/selectall">Board</a></li>
                     <li><a class="nav-link scrollto" href="/board/list.html">Setting</a></li>
                     <i class="bi bi-chevron-down">
@@ -47,3 +47,9 @@
         </nav>
     </div>
 </header>
+<script>
+    document.querySelector("#logoutBtn").addEventListener("click", async () => {
+        await fetch("${root}/user/logout", {method: "GET"});
+        window.location.reload();
+    })
+</script>

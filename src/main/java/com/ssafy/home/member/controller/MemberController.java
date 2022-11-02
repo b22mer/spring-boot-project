@@ -36,15 +36,11 @@ public class MemberController {
     }
 
     @GetMapping("logout")
-    public String logout(HttpServletRequest req) {
+    public void logout(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-
-        return "index";
-        
-        
     }
 
     @GetMapping("/login")

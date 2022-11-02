@@ -15,12 +15,12 @@ public class WebConfig implements WebMvcConfigurer {
     private final MemberInterceptor memberInterceptor;
 
     private static final List<String> interceptorUrlPatterns = Arrays.asList("/user/*", "/board/*");
-    private static final List<String> excludeInterceptorUrlPatterns = Arrays.asList("/user/login", "/user/register", "/board", "house");
+    private static final List<String> excludeInterceptorUrlPatterns = Arrays.asList("/user/login", "/user/register", "/house/*");
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(memberInterceptor)
                 .addPathPatterns(interceptorUrlPatterns)
-                .excludePathPatterns("/user/login", "/user/register", "/board/*", "/house/*");
+                .excludePathPatterns(excludeInterceptorUrlPatterns);
     }
 }
