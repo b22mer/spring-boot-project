@@ -170,23 +170,21 @@ ErrorResponse로 응답 객체를 만들고 ResponseEntity로 json 형태로 반
 
 ```java
 
-// WebConfig.java
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
     private final MemberInterceptor memberInterceptor;
 
     private static final List<String> interceptorUrlPatterns = Arrays.asList("/user/*", "/board/*");
-    private static final List<String> excludeInterceptorUrlPatterns = Arrays.asList("/user/login", "/user/register", "/board", "house");
+    private static final List<String> excludeInterceptorUrlPatterns = Arrays.asList("/user/login", "/user/register", "/house/*");
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(memberInterceptor)
                 .addPathPatterns(interceptorUrlPatterns)
-                .excludePathPatterns("/user/login", "/user/register");
+                .excludePathPatterns(excludeInterceptorUrlPatterns);
     }
 }
-
 ```
 `WebMvcConfigurer`를 implements하여 addInterceptors를 override한다. Interceptor를 적용할 url 패턴과 제외할 패턴을 지정할 수 있다. 
 ```java
@@ -198,19 +196,19 @@ public class MemberInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
         if (session != null) {
             Member member = (Member) session.getAttribute("member");
-            if (member.getName() == null) {
-                response.sendRedirect(request.getContextPath() + "/login");
-                System.out.println("member null");
+            if (member == null) {
+                response.sendRedirect(request.getContextPath() + "/");
                 return false;
             }
             request.setAttribute("member", member);
             return true;
         }
-        response.sendRedirect(request.getContextPath() + "/login");
+        response.sendRedirect(request.getContextPath() + "/");
         return false;
     }
 }
 ```
 `MemberInterceptor`클래스에 HandlerInterceptor를 implements한다. 3가지의 메서드를 override할 수 있으며, controller의 메서드에 도달하기 전에 동작하는 `preHandler`를 사용한다. 
 session이 존재하면 session에서 로그인 시 저장된 member 객체를 얻어온다. member 객체가 존재하는 경우 request의 속성에 member를 추가해 준다. Controller에서는 HttpServletRequest에서 member 속성을 받아 현재 로그인된 사용자의 정보를 사용할 수 있다. 
-session이 존재하지 않거나 member 객체가 존재하지 않은 경우 로그인을 하도록 한다. 
+session이 존재하지 않거나 member 객체가 존재하지 않은 경우 index 페이지로 redirect 하게 된다. 
+
