@@ -5,13 +5,16 @@
 
 <mapper namespace="com.ssafy.home.board.mapper.BoardMapper">
     <resultMap type="boardDto" id="article">
+        <result column="code" property="code"/>
         <result column="article_no" property="articleNo"/>
-        <result column="user_id" property="userId"/>
-        <result column="user_name" property="userName"/>
-        <result column="subject" property="subject"/>
+        <result column="id" property="id"/>
+        <result column="groupOrd" property="groupOrd"/>
+        <result column="groupLayer" property="groupLayer"/>
+        <result column="writer" property="writer"/>
+        <result column="title" property="title"/>
         <result column="content" property="content"/>
         <result column="hit" property="hit"/>
-        <result column="register_time" property="registerTime"/>
+        <result column="reg_datetime" property="registerTime"/>
     </resultMap>
 
     <resultMap type="boardDto" id="viewArticle" extends="article">
@@ -33,8 +36,8 @@
 
     <!--게시글 insert-->
     <insert id="writeBoard" parameterType="boardDto">
-        insert into board (id, subject, content, hit, register_time)
-        values (#{userId}, #{subject}, #{content}, 0, now())
+        insert into board (code, groupOrd, groupLayer, title, content, writer, hit, reg_datetime, id)
+        values (#{code}, #{groupOrd}, 0, #{title}, #{content}, #{writer}, 0, now(), #{id})
     </insert>
 
     <!--file data 저장 -->
@@ -44,6 +47,21 @@
             (#{file.uuid}, #{file.fileName}, #{file.contentType})
         </foreach>
     </insert>
+
+    <!--board list-->
+    <select id="selectAll" parameterType="map" resultMap="article">
+        SELECT code,
+               article_no,
+               groupOrd,
+               groupLayer,
+               concat(LPAD('>', groupLayer * 4, '-'), title) title,
+               content,
+               writer,
+               reg_datetime,
+               id
+        FROM board
+        ORDER BY article_no DESC, groupOrd ASC
+    </select>
 
     <sql id="search">
         <if test="word != null and word != ''">
@@ -56,14 +74,6 @@
         </if>
     </sql>
 
-    <select id="listArticle" parameterType="map" resultMap="article">
-        select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name
-        from board b, members m
-        where b.user_id = m.user_id
-        <include refid="search"></include>
-        order by b.article_no desc
-        limit #{start}, #{listsize}
-    </select>
 
     <select id="getTotalArticleCount" parameterType="map" resultType="int">
         select count(article_no)

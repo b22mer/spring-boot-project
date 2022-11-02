@@ -38,6 +38,7 @@ public class MemberService {
     }
     
     public void delete(Member member)throws Exception{
+        System.out.println(member.getId());
     	memberMapper.userDelete(member);
     	
     }

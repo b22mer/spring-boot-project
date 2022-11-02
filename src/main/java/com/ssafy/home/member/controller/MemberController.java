@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,34 +36,30 @@ public class MemberController {
 //        System.out.println(new ResponseEntity<>(res, HttpStatus.OK));
 //        return new ResponseEntity<>(res, HttpStatus.OK);
 //    }
-    
+
 
     @DeleteMapping("delete")
     public void delete(HttpServletRequest req) throws Exception {
-    	HttpSession session = req.getSession(false);
-    	if(session!=null) {
-    		Member m = (Member) session.getAttribute("member");
-        	memberService.delete(m);
-    		session.invalidate();
-    	}
-    	
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            Member m = (Member) session.getAttribute("member");
+            memberService.delete(m);
+            session.invalidate();
+        }
     }
-    
+
     @GetMapping("info")
     public String userInfo() {
-    	 return "user/info";
+        return "user/info";
     }
-   
+
 
     @GetMapping("logout")
-    public String logout(HttpServletRequest req) {
+    public void logout(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-
-        return "index";
-  
     }
 
     @GetMapping("/login")
@@ -128,10 +123,10 @@ public class MemberController {
     public ResponseEntity<ResponseDTO> idCheck(
             @ApiParam(value = "id")
             @RequestBody Map<String, String> map) {
-    
-    	//System.out.println(map.get("id"));
-       int isId = memberService.checkId(map.get("id"));
-        
+
+        //System.out.println(map.get("id"));
+        int isId = memberService.checkId(map.get("id"));
+
         ResponseDTO res = new ResponseDTO();
         if (isId > 0) {
             // id 존재

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.home.house.mapper.HouseMapper">
+    <resultMap id="dong" type="DongCodeDTO">
+        <result column="dongCode" property="dongCode"/>
+        <result column="sidoName" property="sidoName"/>
+        <result column="gugunName" property="gugunName"/>
+        <result column="dongName" property="dongName"/>
+    </resultMap>
+
+
+    <select id="getGugun" parameterType="String" resultType="String">
+        select distinct gugunName
+        from dongcode
+        where sidoName = #{sidoName}
+          and gugunName is not null
+    </select>
+
+    <select id="getDong" parameterType="map" resultType="String">
+        select distinct dongName
+        from dongcode
+        where sidoName = #{sidoName}
+          and gugunName = #{gugunName}
+          and dongName is not null
+    </select>
+
+    <select id="getHouseDealInfo" parameterType="DealInfoDTO" resultType="HouseDTO">
+        select i.dong,
+               i.roadName,
+               i.apartmentName,
+               i.lat,
+               i.lng,
+               d.floor,
+               d.area,
+               d.dealAmount,
+               d.no
+        from houseinfo as i
+                 inner join housedeal as d
+                            on i.aptCode = d.aptCode
+        where i.dongCode = (select dongCode
+                            from dongcode
+                            where sidoname = #{sidoName} and gugunName = #{gugunName} and dongName = #{dong})
+          and d.dealYear = #{year}
+          and d.dealMonth = #{month}
+    </select>
+</mapper>
