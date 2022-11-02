@@ -37,7 +37,7 @@
     <!--게시글 insert-->
     <insert id="writeBoard" parameterType="boardDto">
         insert into board (code, groupOrd, groupLayer, title, content, writer, hit, reg_datetime, id)
-        values (#{code}, #{groupOrd}, 0, #{title}, #{content}, #{writer}, 0, now(), #{userId})
+        values (#{code}, #{groupOrd}, 0, #{title}, #{content}, #{writer}, 0, now(), #{id})
     </insert>
 
     <!--file data 저장 -->
