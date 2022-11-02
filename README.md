@@ -1,20 +1,13 @@
 # 요구사항
 
-## 기본
+## 기본 기능 구현
 
-| 구현 기능           | 비고                                                        |
-|-----------------|-----------------------------------------------------------|
-| 메인 페이지          |                                                           |
-| 회원 관리 페이지       | 회원 정보 등록 <br>회원정보 수정<br>회원정보 삭제<br>회원정보 검색                |
-| 로그인 / 로그아웃 페이지  |                                                           |
-| 실거래가 검색, 결과 페이지 | 전체 검색 화면 - 10<br>상세 검색 - 10<br>동별 화면 - 5<br>아파트별 검색 화면 -5 |
-
-## 추가
-
-- 비밀번호 찾기, 사이트맵, 메뉴 구성 화면
-- 관심 지역 동네 업종 정보
-- 관심 지역 대기 오염 정보
-- 웹사이트 소개, 공지사항 관리 화면
+| 구현 기능           | 비고                                       |
+|-----------------|------------------------------------------|
+| 메인 페이지          |                                          |
+| 회원 관리 페이지       | 회원 정보 등록 <br>회원정보 수정<br>회원정보 삭제<br>회원정보 검색 |
+| 로그인 / 로그아웃 페이지  |                                          |
+| 실거래가 검색, 결과 페이지 | 전체 검색 화면<br>상세 검색<br>동별 화면<br>아파트별 검색 화면 |
 
 ---
 
@@ -26,6 +19,55 @@
 |--|
 |이상원|
 |정원철 |
+
+## 기본 구현기능
+
+### 1. 회원정보 관리
+
+- 회원정보 확인
+
+        로그인 상태로 현재 회원정보확인을 할수있는 "info" 탭을 누르게되면 현재 세션이 로그인되어있는 회원의 정보가 출력된다.
+
+- 회원정보 수정
+
+        위에서 띄운 각 회원정보란의 입력과 삭제를 통하여 회원의 정보를 수정할 수 있다. id는 readonly처리를 통하여 변경할수없도록 설정되었다.
+
+- 회원정보 삭제
+
+        회원탈퇴 버튼을 클릭하게되면 현재 세션에 로그인되어있는 id 값을 토대로 회원의 정보를 삭제하게된다. 현재 회원의 정보를 삭제한것이기에 회원정보 삭제뿐만 아니라 현재 로그인 되어있는 세션을 종료처리해주어 자동으로 로그아웃 하도록 설정되었다.
+
+- 회원등록 기능
+
+        register 버튼을 통하여 서브탭이 팝업되며 해당 회원가입팝업에서 성명, 포지션, ID, 비밀번호와 이메일 그리고 전화번호를 기준으로 회원가입을 진행한다. 이미 이전에 가입한 이력이 있는 ID(이미 DB에 존재하는 ID)는 중복검사를 통하여 확인한다. 중복되는 아이디일 경우에는 회원가입이 되지 않도록 설정을 했다.
+
+### 2. 메인페이지 (실거래 페이지)
+
+- 지도 api 연동
+
+        deal info 탭에 접속하게되면 카카오맵 연동을 통해 현재 임의로 설정해놓은 위도와 경도로를 기반으로 첫 뷰가 보이게된다.
+
+- 아파트 실거래가 검색
+
+        deal info page에서 시/도, 구/군, 동 그리고 날짜선택을 통하여 해당 선택에 부합하는 아파트의 실거래가 매매정보가 각 정보 Colunm에 맞게 리스트로 출력이된다. 상위 지역에서 존재하는 하위지역명이 각각 다르기에 이를 따로 설정해주어 지역을 고를때 구역을 나눠서 설정했다.
+
+### 3. 공지사항 (게시판 페이지)
+
+- 글 목록 확인
+
+        공지사항 페이지는 기본적으로 로그인상태에서 열람이 가능하다. 로그인이 되지 않은 상태에서는 Board탭이 활성화 되지 않고, 또한 주소로 강제로 이동을 한다고 하더라도 세션처리를 통하여 접속을 막는다. Board 탭에 접속하게되면 이전에 작성되었던 글들이 페이지 단위로 출력이된다. 각 페이지 넘버와 작성자 그리고 작성날짜가 출력되는데, 총 작성된 게시글의 수가 설정범위를 넘어가게되면 다음 페이지로 넘겨 출력하게된다.
+
+- 글 작성
+
+        글쓰기 버튼을 작성하게되면 제목과 내용 그리고 파일을 업로드할수있는 공란이 화면에 출력되게된다. 제목란과 글 내용란을 작성하고 파일업로드를 진행 후 확인을 누르게 되면 해당 글내용이 위 글 목록페이지에 표현된다.
+
+### 4. 생각해봐야할 기능
+
+- 공지사항 글 작성관련 권한 설정방법
+
+일반적인 공지사항에서는 Admin(관리자)는 글 작성, 열람, 그리고 많으면 수정 권한까지 존재하고 일반 user는 오직 열람만을 할수있다. 그런 권한 설정을 어떻게 해야할지 생각해보았을때 가장 간단한 방법으로는
+해당 사이트의 회원목록 DB에 관리자와 회원간의 차별을 둔 다른 컬럼을(0 OR 1) 설정한후 글 작성과 수정을할시 해당 컬럼의 확인을 통하여 권한이 존재하는지 체크하는 방법이 있을 것 같다고 생각을 했다.
+
+---
 
 ## AOP를 사용해 예외처리 관리하기
 
@@ -170,23 +212,21 @@ ErrorResponse로 응답 객체를 만들고 ResponseEntity로 json 형태로 반
 
 ```java
 
-// WebConfig.java
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
     private final MemberInterceptor memberInterceptor;
 
     private static final List<String> interceptorUrlPatterns = Arrays.asList("/user/*", "/board/*");
-    private static final List<String> excludeInterceptorUrlPatterns = Arrays.asList("/user/login", "/user/register", "/board", "house");
+    private static final List<String> excludeInterceptorUrlPatterns = Arrays.asList("/user/login", "/user/register", "/house/*");
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(memberInterceptor)
                 .addPathPatterns(interceptorUrlPatterns)
-                .excludePathPatterns("/user/login", "/user/register");
+                .excludePathPatterns(excludeInterceptorUrlPatterns);
     }
 }
-
 ```
 
 `WebMvcConfigurer`를 implements하여 addInterceptors를 override한다. Interceptor를 적용할 url 패턴과 제외할 패턴을 지정할 수 있다.
@@ -201,15 +241,14 @@ public class MemberInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
         if (session != null) {
             Member member = (Member) session.getAttribute("member");
-            if (member.getName() == null) {
-                response.sendRedirect(request.getContextPath() + "/login");
-                System.out.println("member null");
+            if (member == null) {
+                response.sendRedirect(request.getContextPath() + "/");
                 return false;
             }
             request.setAttribute("member", member);
             return true;
         }
-        response.sendRedirect(request.getContextPath() + "/login");
+        response.sendRedirect(request.getContextPath() + "/");
         return false;
     }
 }
@@ -219,7 +258,7 @@ public class MemberInterceptor implements HandlerInterceptor {
 동작하는 `preHandler`를 사용한다.
 session이 존재하면 session에서 로그인 시 저장된 member 객체를 얻어온다. member 객체가 존재하는 경우 request의 속성에 member를 추가해 준다. Controller에서는
 HttpServletRequest에서 member 속성을 받아 현재 로그인된 사용자의 정보를 사용할 수 있다.
-session이 존재하지 않거나 member 객체가 존재하지 않은 경우 로그인을 하도록 한다.
+session이 존재하지 않거나 member 객체가 존재하지 않은 경우 index 페이지로 redirect 하게 된다.
 
 # WebCam
 
@@ -265,3 +304,97 @@ public String detail(@PathVariable String code,HttpServletRequest req){
 - 게시판 상세보기 페이지이다. 목록에서는 GET요청으로 글의 id를 query string으로 담아 요청한다.
 - @PathVariable 어노테이션으로 query string 값을 받아 올 수 있다.
 - 상세보기 페이지에서 내용을 수정한 뒤 `제출`을 누르게 되면 게시글의 정보가 수정된다.
+
+# Swagger API document
+
+swagger 3.0을 이용해서 API문서를 사용할 수 있다.
+
+## 의존성 추가
+
+```xml
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-boot-starter</artifactId>
+    <version>3.0.0</version>
+</dependency>
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+<dependency>
+<groupId>io.springfox</groupId>
+<artifactId>springfox-swagger-ui</artifactId>
+<version>3.0.0</version>
+</dependency>
+```
+
+- springfox-boot-starter와 springfox-swagger-ui 3버전을 추가한다.
+
+## Swagger Configuration
+
+```java
+
+@Configuration
+public class SwaggerConfiguration {
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.OAS_30)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
+}
+```
+
+- Swagger 사용을 정의해 준다. @Configuration 어노테이션을 사용해 설정 파일임을 명시해 준다.
+- API 문서의 설명을 정의할 수 있다.
+
+## Controller에서 swagger 정의
+
+```java
+
+@Api(tags = {"users"})
+@Controller
+@RequestMapping("/user")
+@RequiredArgsConstructor
+public class MemberController {
+    @PostMapping("/login")
+    @ResponseBody
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "로그인 성공")
+    })
+    public ResponseEntity<ResponseDTO> login(
+            @ApiParam(value = "member")
+            @RequestBody LoginDTO member,
+            HttpServletRequest req) {
+        ResponseDTO res = new ResponseDTO();
+        try {
+            // 로그인 프로세스 추가
+            Member user = memberService.login(member);
+            HttpSession session = req.getSession();
+            session.setAttribute("member", user);
+
+            res.setStatus("success");
+            res.setMsg("login success");
+            res.setBody(user);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            res.setStatus("fail");
+            res.setErrMsg("로그인 정보가 잘못되었습니다. 다시 로그인해 주세요");
+            return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
+        }
+    }
+}
+```
+
+- Controller class에 `@Api(tags = {"users"})`로 Controller의 도메인을 지정해 준다.
+- Controller의 각 메서드에 @ApiResponses 어노테이션으로 응답에 대한 정보를 정의해 줄 수 있다.
+- 메서드의 파라미터에 @ApiParam()으로 파라미터 값의 정보를 명시해 줄 수 있다. 파라미터 타입이나 required 여부 등을 정의할 수 있다.
+
+## Swagger api 문서 보기
+
+![스크린샷 2022-11-03 오전 1 03 54](https://user-images.githubusercontent.com/55802893/199540419-b8c69d32-1c47-4037-8555-a692f80d14d0.png)
+
+- 위 login 메서드의 요청 부분이다.
+- 파라미터로 LoginDTO를 받게 되고 LoginDTO에는 id와 pw가 String으로 들어오게 된다.
+- 응답은 ResponseDTO 객체를 반환해 주는데 응답 예시를 알 수 있다.
+- 파라미터 정보와 응답 정보를 통해 어떤 데이터 형식으로 요청을하고 반환되는지 API 문서만 보고 이해할 수 있다. 

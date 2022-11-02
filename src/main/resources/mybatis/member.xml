@@ -48,4 +48,11 @@
     	from member 
     	where id = #{id}
     </delete>
+    
+     <update id="userUpdate" parameterType="Member">
+        UPDATE 
+        member SET name= #{name},email=#{email},phone_number=#{phoneNumber} WHERE id =#{id}
+    </update>
+
+    
 </mapper>

@@ -62,4 +62,9 @@ public class MemberService {
     public int checkId(String userId) {
         return memberMapper.idCheck(userId);
     }
+    
+	public void update(Member member) {
+		memberMapper.userUpdate(member);
+	}
+
 }

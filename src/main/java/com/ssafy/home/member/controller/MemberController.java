@@ -3,6 +3,7 @@ package com.ssafy.home.member.controller;
 import com.ssafy.home.common.dto.ResponseDTO;
 import com.ssafy.home.member.dto.LoginDTO;
 import com.ssafy.home.member.dto.Member;
+import com.ssafy.home.member.dto.UpdateDTO;
 import com.ssafy.home.member.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -26,16 +27,20 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final MemberService memberService;
 
-//    @GetMapping("info")
-//    @ResponseBody
-//    public ResponseEntity<ResponseDTO> userInfo(HttpServletRequest req) {
-//        Member member = (Member) req.getAttribute("member");
-//        ResponseDTO res = new ResponseDTO();
-//        res.setStatus("success");
-//        res.setBody(member);
-//        System.out.println(new ResponseEntity<>(res, HttpStatus.OK));
-//        return new ResponseEntity<>(res, HttpStatus.OK);
-//    }
+    @PutMapping("/update")
+    @ResponseBody
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "사용자 정보수정")
+    })
+    public String update(
+            @ApiParam(value = "member")
+            @RequestBody Member member) throws Exception {
+        System.out.println(member.getName());
+        memberService.update(member);
+        return "update ok";
+       
+    }
+
 
 
     @DeleteMapping("delete")

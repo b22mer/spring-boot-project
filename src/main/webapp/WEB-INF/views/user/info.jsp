@@ -57,20 +57,29 @@
 </article>
 
 <script>
-    document.querySelector("#updateBtn").addEventListener("click", async () => {
+//1) 추가
+document.querySelector("#updateBtn").addEventListener("click", async () => {
 
 
-        data = await fetch("memberinfo", data);
-        data = await data.text();
-        data = JSON.parse(data);
-        if (data.errMsg) {
-            alert(data.errMsg);
-        } else {
-            opener.parent.location.reload();
-            window.close();
-        }
+	  let name = document.querySelector("#name").value;
+	  let position = document.querySelector("#position").value;
+	  let email = document.querySelector("#email").value;
+	  let phoneNumber = document.querySelector("#phoneNumber").value;  
+	  let data = {
+	        method: "PUT",
+	        body: JSON.stringify({name, position, email, phoneNumber}),
+	        headers: {"Content-Type": "application/json"},
+	    };
+	    
+	    
+	    data = await fetch("update", data);
+	    data = await data.text();
+	    alert(data);
+        opener.parent.location.reload();
+        window.close();
 
-    });
+  
+});
 
 
     document.querySelector("#deleteBtn").addEventListener("click", async () => {
