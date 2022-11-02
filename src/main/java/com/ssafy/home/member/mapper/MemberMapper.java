@@ -1,6 +1,8 @@
 package com.ssafy.home.member.mapper;
 
 import com.ssafy.home.member.dto.Member;
+import com.ssafy.home.member.dto.UpdateDTO;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Map;
@@ -14,4 +16,5 @@ public interface MemberMapper {
     int idCheck(String userId);
     Member userInfo(String userId);
 	void userDelete(Member member);
+	void userUpdate(Member member);
 }

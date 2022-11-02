@@ -2,6 +2,7 @@ package com.ssafy.home.member.service;
 
 import com.ssafy.home.member.dto.LoginDTO;
 import com.ssafy.home.member.dto.Member;
+import com.ssafy.home.member.dto.UpdateDTO;
 import com.ssafy.home.member.mapper.MemberMapper;
 import com.ssafy.home.security.mapper.SecurityMapper;
 import com.ssafy.home.security.dto.SecVO;
@@ -61,4 +62,8 @@ public class MemberService {
     public int checkId(String userId) {
         return memberMapper.idCheck(userId);
     }
+
+	public void update(Member member) {
+		memberMapper.userUpdate(member);
+	}
 }

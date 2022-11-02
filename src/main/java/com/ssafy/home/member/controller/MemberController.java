@@ -3,6 +3,7 @@ package com.ssafy.home.member.controller;
 import com.ssafy.home.common.dto.ResponseDTO;
 import com.ssafy.home.member.dto.LoginDTO;
 import com.ssafy.home.member.dto.Member;
+import com.ssafy.home.member.dto.UpdateDTO;
 import com.ssafy.home.member.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -48,6 +49,19 @@ public class MemberController {
     		session.invalidate();
     	}
     	
+    }
+    
+    @PutMapping("/update")
+    @ResponseBody
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "사용자 정보수정")
+    })
+    public void update(
+            @ApiParam(value = "member")
+            @RequestBody UpdateDTO member) throws Exception {
+        System.out.println(member.getName());
+        memberService.update(member);
+       
     }
     
     @GetMapping("info")
