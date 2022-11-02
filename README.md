@@ -1,15 +1,21 @@
-# 요구사항
-
-## 기본 기능 구현
-
-| 구현 기능           | 비고                                       |
-|-----------------|------------------------------------------|
-| 메인 페이지          |                                          |
-| 회원 관리 페이지       | 회원 정보 등록 <br>회원정보 수정<br>회원정보 삭제<br>회원정보 검색 |
-| 로그인 / 로그아웃 페이지  |                                          |
-| 실거래가 검색, 결과 페이지 | 전체 검색 화면<br>상세 검색<br>동별 화면<br>아파트별 검색 화면 |
-
 # Where Is My Home
+
+## Contents
+
+1. [회원 정보 관리](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#1-회원정보-관리)
+2. [생각해 봐야할 기능](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#2-생각해봐야할-기능)
+3. [AOP를 사용해 예외처리 관리하기](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#3-aop를-사용해-예외처리-관리하기)
+    - [BadSqlGrammarException](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#badsqlgrammarexception)
+    - [NullPointerException](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#nullpointerexception)
+4. [Interceptor를 사용한 login required 구현](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#4-interceptor를-사용한-login-required-구현)
+    - [Interceptor 정의하기](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#interceptor-정의하기)
+5. [WebCam](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#5-webcam)
+6. [아파트 실거래가 조회](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#6-아파트-실거래가-조회)
+7. [게시판](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#7-게시판)
+8. [Swagger API document](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#8-swagger-api-document)
+9. [사용자 정보 암호화 하기](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#9-사용자-정보-암호화-하기)
+10. [SQL Injection](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#10-sql-injection)
+11. [CSRF](https://lab.ssafy.com/s08/a19/12_whereismyhome_spring2/pair05_leesangwon_jeongwoncheol/-/tree/master#11-csrfcross-site-request-forgery)
 
 ### Member
 
@@ -56,8 +62,6 @@
 
 일반적인 공지사항에서는 Admin(관리자)는 글 작성, 열람, 그리고 많으면 수정 권한까지 존재하고 일반 user는 오직 열람만을 할수있다. 그런 권한 설정을 어떻게 해야할지 생각해보았을때 가장 간단한 방법으로는
 해당 사이트의 회원목록 DB에 관리자와 회원간의 차별을 둔 다른 컬럼을(0 OR 1) 설정한후 글 작성과 수정을할시 해당 컬럼의 확인을 통하여 권한이 존재하는지 체크하는 방법이 있을 것 같다고 생각을 했다.
-
----
 
 ## 3. AOP를 사용해 예외처리 관리하기
 
