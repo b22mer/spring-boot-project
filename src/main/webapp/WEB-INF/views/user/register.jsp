@@ -4,6 +4,7 @@
 <head>
     <%@include file="../common/head.jsp" %>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>회원가입</title>
 </head>
 <body>
