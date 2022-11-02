@@ -49,7 +49,7 @@ public class BoardController {
             BoardDto boardDto
     ) throws IOException {
         Member member = (Member) req.getAttribute("member");
-        boardDto.setUserId(member.getId());
+        boardDto.setId(member.getId());
         ResponseDTO res = new ResponseDTO();
         List<FileDTO> list = new ArrayList<>();
         for (MultipartFile file :
@@ -72,24 +72,19 @@ public class BoardController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @PostMapping("/list")
+    @ResponseBody
+    public PageInfo<?> selectAll(HttpServletRequest request) {
+        PageHelper.startPage(request);
+        List<BoardDto> list = boardService.selectAll();
+        return PageInfo.of(list);
+    }
+
+
     @GetMapping("/selectall")
     public String list() {
         return "board/list";
     }
 
-//    @PostMapping("/writeboard")
-//    public void writeBoard(
-//            @ApiParam(value = "board")
-//            @RequestBody WriteBoardDTO board) {
-//        System.out.println(board);
-//        long res = boardService.writeBoard(board);
-//        if (res > 0) {
-//            // 정상적으로 저장됨
-//            System.out.println("insert success");
-//        } else {
-//            System.out.println("insert fail");
-//        }
-
-//    }
 
 }
