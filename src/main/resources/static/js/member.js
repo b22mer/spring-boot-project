@@ -16,4 +16,5 @@ document.querySelector("#loginBtn").addEventListener("click", async () => {
     // login 창 닫기
 
     alert(data);
+    
 });

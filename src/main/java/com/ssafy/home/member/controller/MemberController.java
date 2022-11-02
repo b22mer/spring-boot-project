@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,15 +27,34 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("info")
-    @ResponseBody
-    public ResponseEntity<ResponseDTO> userInfo(HttpServletRequest req) {
-        Member member = (Member) req.getAttribute("member");
-        ResponseDTO res = new ResponseDTO();
-        res.setStatus("success");
-        res.setBody(member);
-        return new ResponseEntity<>(res, HttpStatus.OK);
+//    @GetMapping("info")
+//    @ResponseBody
+//    public ResponseEntity<ResponseDTO> userInfo(HttpServletRequest req) {
+//        Member member = (Member) req.getAttribute("member");
+//        ResponseDTO res = new ResponseDTO();
+//        res.setStatus("success");
+//        res.setBody(member);
+//        System.out.println(new ResponseEntity<>(res, HttpStatus.OK));
+//        return new ResponseEntity<>(res, HttpStatus.OK);
+//    }
+
+
+    @DeleteMapping("delete")
+    public void delete(HttpServletRequest req) throws Exception {
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            Member m = (Member) session.getAttribute("member");
+            memberService.delete(m);
+            session.invalidate();
+        }
+
     }
+
+    @GetMapping("info")
+    public String userInfo() {
+        return "user/info";
+    }
+
 
     @GetMapping("logout")
     public void logout(HttpServletRequest req) {
@@ -102,9 +123,12 @@ public class MemberController {
     @PostMapping("idchck")
     @ResponseBody
     public ResponseEntity<ResponseDTO> idCheck(
-            @ApiParam(value = "userId")
-            @RequestParam String userId) {
-        int isId = memberService.checkId(userId);
+            @ApiParam(value = "id")
+            @RequestBody Map<String, String> map) {
+
+        //System.out.println(map.get("id"));
+        int isId = memberService.checkId(map.get("id"));
+
         ResponseDTO res = new ResponseDTO();
         if (isId > 0) {
             // id 존재

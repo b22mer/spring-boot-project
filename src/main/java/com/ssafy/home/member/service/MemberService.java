@@ -36,7 +36,13 @@ public class MemberService {
         user.setName(name);
         return user;
     }
-
+    
+    public void delete(Member member)throws Exception{
+    	memberMapper.userDelete(member);
+    	
+    }
+    
+    
 
     public void register(Member member) throws Exception {
         // 사용자 정보 암호화
@@ -50,7 +56,6 @@ public class MemberService {
         member.setName(CipherUtil.aesEncrypt(member.getName(), key));
         member.setPw(new String(CipherUtil.getSHA256(member.getPw(), secVO.getSalt())));
         memberMapper.register(member);
-
     }
 
     public int checkId(String userId) {
