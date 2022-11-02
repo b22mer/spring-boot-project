@@ -8,5 +8,6 @@
         <mapper resource="mybatis/member.xml"/>
         <mapper resource="mybatis/security.xml"/>
         <mapper resource="mybatis/board.xml"/>
+        <mapper resource="mybatis/house.xml"/>
     </mappers>
 </configuration>

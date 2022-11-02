@@ -1,17 +1,63 @@
 package com.ssafy.home.board.dto;
 
+import java.util.Date;
 import java.util.List;
 
 public class BoardDto {
 
+    private int code;
     private int articleNo;
-    private String userId;
-    private String userName;
-    private String subject;
+    private int groupOrd;
+    private int groupLayer;
+    private String title;
     private String content;
+    private String writer;
     private int hit;
-    private String registerTime;
+    private Date registerTime;
+    private String id;
     private List<FileDTO> fileInfos;
+
+    @Override
+    public String toString() {
+        return "BoardDto{" +
+                "code=" + code +
+                ", articleNo=" + articleNo +
+                ", groupOrd=" + groupOrd +
+                ", groupLayer=" + groupLayer +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", writer='" + writer + '\'' +
+                ", hit=" + hit +
+                ", registerTime=" + registerTime +
+                ", id='" + id + '\'' +
+                ", fileInfos=" + fileInfos +
+                '}';
+    }
+
+    public BoardDto() {
+    }
+
+    public BoardDto(int code, int articleNo, int groupOrd, int groupLayer, String title, String content, String writer, int hit, Date registerTime, String id, List<FileDTO> fileInfos) {
+        this.code = code;
+        this.articleNo = articleNo;
+        this.groupOrd = groupOrd;
+        this.groupLayer = groupLayer;
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.hit = hit;
+        this.registerTime = registerTime;
+        this.id = id;
+        this.fileInfos = fileInfos;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public int getArticleNo() {
         return articleNo;
@@ -21,28 +67,28 @@ public class BoardDto {
         this.articleNo = articleNo;
     }
 
-    public String getUserId() {
-        return userId;
+    public int getGroupOrd() {
+        return groupOrd;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setGroupOrd(int groupOrd) {
+        this.groupOrd = groupOrd;
     }
 
-    public String getUserName() {
-        return userName;
+    public int getGroupLayer() {
+        return groupLayer;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setGroupLayer(int groupLayer) {
+        this.groupLayer = groupLayer;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -53,6 +99,14 @@ public class BoardDto {
         this.content = content;
     }
 
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
     public int getHit() {
         return hit;
     }
@@ -61,12 +115,20 @@ public class BoardDto {
         this.hit = hit;
     }
 
-    public String getRegisterTime() {
+    public Date getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(String registerTime) {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<FileDTO> getFileInfos() {
@@ -76,12 +138,4 @@ public class BoardDto {
     public void setFileInfos(List<FileDTO> fileInfos) {
         this.fileInfos = fileInfos;
     }
-
-    @Override
-    public String toString() {
-        return "BoardDto [articleNo=" + articleNo + ", userId=" + userId + ", userName=" + userName + ", subject="
-                + subject + ", content=" + content + ", hit=" + hit + ", registerTime=" + registerTime + ", fileInfos="
-                + fileInfos + "]";
-    }
-
 }
