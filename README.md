@@ -24,7 +24,75 @@
 |이상원|
 |정원철 |
 
-## 1. 회원정보 관리
+## 프로젝트 구조
+
+#### Server
+
+```shell
+.
+├── ServletInitializer.java
+├── WhereIsMyHouseApplication.java
+├── aop
+│ └── GlobalExceptionHandler.java
+├── board
+│ ├── controller
+│ ├── dto
+│ ├── mapper
+│ └── service
+├── common
+│ ├── controller
+│ └── dto
+├── config
+│ ├── SwaggerConfiguration.java
+│ └── WebConfig.java
+├── error
+│ └── ErrorResponse.java
+├── house
+│ ├── controller
+│ ├── dto
+│ ├── mapper
+│ └── service
+├── interceptor
+│ └── MemberInterceptor.java
+├── member
+│ ├── controller
+│ ├── dto
+│ ├── mapper
+│ └── service
+├── security
+│ ├── dto
+│ └── mapper
+└── util
+    └── CipherUtil.java
+```
+
+### Client
+
+```shell
+.
+├── board
+│ ├── detail.jsp
+│ ├── list.jsp
+│ ├── result.jsp
+│ └── upload.jsp
+├── common
+│ ├── head.jsp
+│ ├── header.jsp
+│ └── script.jsp
+├── house
+│ └── deal.jsp
+├── index.jsp
+└── user
+    ├── info.jsp
+    ├── login.jsp
+    └── register.jsp
+```
+
+## 데이터베이스 구조
+
+![](https://user-images.githubusercontent.com/55802893/199618360-ee544528-0dda-4e89-9b8b-272ecacaf733.png)
+
+## 회원정보 관리
 
 - 회원정보 확인
 
@@ -56,14 +124,14 @@
   ![회원등록 완료 -8](https://user-images.githubusercontent.com/74225835/199534310-a9535ee6-73fc-44fb-85a5-e404df5df4f6.PNG)
   ![등록히 디비 -9](https://user-images.githubusercontent.com/74225835/199534321-c2c0a23a-8aa9-44b6-bafe-5421837da173.PNG)
 
-## 2. 생각해봐야할 기능
+## 생각해봐야할 기능
 
 - 공지사항 글 작성관련 권한 설정방법
 
 일반적인 공지사항에서는 Admin(관리자)는 글 작성, 열람, 그리고 많으면 수정 권한까지 존재하고 일반 user는 오직 열람만을 할수있다. 그런 권한 설정을 어떻게 해야할지 생각해보았을때 가장 간단한 방법으로는
 해당 사이트의 회원목록 DB에 관리자와 회원간의 차별을 둔 다른 컬럼을(0 OR 1) 설정한후 글 작성과 수정을할시 해당 컬럼의 확인을 통하여 권한이 존재하는지 체크하는 방법이 있을 것 같다고 생각을 했다.
 
-## 3. AOP를 사용해 예외처리 관리하기
+## AOP를 사용해 예외처리 관리하기
 
 AOP는 관점지향 프로그래밍으로 로직을 기준으로 핵심 관점과 부과적인 관점으로 나눠서 보고 그 관점을 기준으로 각각을 모듈화 하는 것이다.
 
@@ -198,7 +266,7 @@ ErrorResponse로 응답 객체를 만들고 ResponseEntity로 json 형태로 반
 
 에러의 메세지와 지정해준 상태 코드가 담겨 응답으로 반환된다. errors와 code 데이터는 추가하지 않아 null을 반환하게 된다.
 
-## 4. Interceptor를 사용한 login required 구현
+## Interceptor를 사용한 login required 구현
 
 웹 서비스의 사용자가 로그인이 되어 있는지 확인하기 위한 interceptor를 구현해 본다. client에서 요청된 url로 넘어가는 과정에서 조건을 충족하는지 확인하는 미들웨어 역할을 한다.
 
@@ -254,13 +322,13 @@ session이 존재하면 session에서 로그인 시 저장된 member 객체를 �
 HttpServletRequest에서 member 속성을 받아 현재 로그인된 사용자의 정보를 사용할 수 있다.
 session이 존재하지 않거나 member 객체가 존재하지 않은 경우 index 페이지로 redirect 하게 된다.
 
-## 5. WebCam
+## WebCam
 
 ![webcam](https://user-images.githubusercontent.com/55802893/199490364-1ae102a2-4123-4929-be1f-f4fe33ee86ea.png)
 
 - header 부분에 `#Selfie`를 클릭하게 되면 위와 같은 웹캡을 사용할 수 있는 모달창이 뜬다.
 
-## 6. 아파트 실거래가 조회
+## 아파트 실거래가 조회
 
 ### 메인페이지 (실거래 페이지)
 
@@ -277,7 +345,7 @@ session이 존재하지 않거나 member 객체가 존재하지 않은 경우 in
 - 시, 군구, 동, 년도, 월을 선택한 후 `매매정보가져오기`를 클릭하게 되면 아파트 실거래 정보를 얻을 수 있다.
 - 아파트 이름을 클릭하게 되면 해당 아파트의 좌표로 지도가 이동한다.
 
-## 7. 게시판
+## 게시판
 
 ### 공지사항 (게시판 페이지)
 
@@ -319,7 +387,7 @@ public String detail(@PathVariable String code,HttpServletRequest req){
 - @PathVariable 어노테이션으로 query string 값을 받아 올 수 있다.
 - 상세보기 페이지에서 내용을 수정한 뒤 `제출`을 누르게 되면 게시글의 정보가 수정된다.
 
-## 8. Swagger API document
+## Swagger API document
 
 swagger 3.0을 이용해서 API문서를 사용할 수 있다.
 
@@ -413,7 +481,7 @@ public class MemberController {
 - 응답은 ResponseDTO 객체를 반환해 주는데 응답 예시를 알 수 있다.
 - 파라미터 정보와 응답 정보를 통해 어떤 데이터 형식으로 요청을하고 반환되는지 API 문서만 보고 이해할 수 있다.
 
-## 9. 사용자 정보 암호화 하기
+## 사용자 정보 암호화 하기
 
 암호화는 크게 양방향 암호화, 단방향 암호화가 있다. 양방향은 키를 이용한 복호화가 가능하다는 차이점이 있다.
 
@@ -569,7 +637,7 @@ public Member login(String id,String pw){
 데이터베이스에 사용자 비밀번호는 해시 함수를 사용하여 암호화 되어 있다. 사용자가 정보를 변경하거나 어떤 동작에서 비밀번호를 입력 하는 행위가 필요한 경우 사용자가 입력한 비밀번호를 동일한 방식으로 해시화 해서
 데이터베이스에 저장된 값과 비교한다.
 
-## 10. SQL Injection
+## SQL Injection
 
 - SQL Injection은 악의적인 사용자가 보안상의 취약점을 이용해 임의의 sql 쿼리를 주입하여 실행하게 한다. 데이터베이스가 비 정상적으로 동작하도록 하는 것이 목적이다.
 
@@ -597,7 +665,7 @@ public Member login(String id,String pw){
 - 하드웨어 형은 네트워크 상에서 서버 앞 단에 직접 하드웨어 장비로 구성한다.
 - 프록시 형은 DNS 서버 주소를 웹 방화벽으로 바꾸고 서버로 가는 트래픽이 웹 방화벽을 먼저 거치도록 한다.
 
-## 11. CSRF(Cross site request forgery)
+## CSRF(Cross site request forgery)
 
 사이트 간 요청 위조는 공격자가 의도한 행위를 특정 웹 사이트에 사용자가 요청하게 하는 공격이다. 특정 웹 사이트가 사용자의 웹 브라우저를 신뢰하는 상태를 노린 공격이다.
 사용자가 웹 사이트에 로그인한 성태에서 사이트간 요청 위조 공격 코드가 삽입된 페이지를 열면, 공격 대상이 되는 웹 사이트는 위조된 공격 명령이 믿을 수 있는 사용자로부터 발송된 것으로 판단하여 공격에 노출된다.
