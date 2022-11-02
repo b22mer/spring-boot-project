@@ -16,9 +16,12 @@
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
+<div class="container w-75">
+    <div id="boardListDiv" class="container mt-3"></div>
 
-<div><a href="${root}/board/upload">글 작성하기</a></div>
-<div id="boardListDiv" class="container mt-3"></div>
+    <div class="text-end"><a class="btn btn-primary" href="${root}/board/upload">글 작성하기</a></div>
+</div>
+
 
 </body>
 <script>
