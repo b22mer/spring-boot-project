@@ -33,6 +33,16 @@ import java.util.*;
 public class BoardController {
     private final BoardService boardService; // 생성자 주입을 위한 처리
 
+    
+    // 1101. deal 페이지 이동
+    @GetMapping("deal")
+    public String deal() {
+        return "board/deal";
+    }
+    
+    
+    
+    
 
     @GetMapping("upload")
     public String upload() {
