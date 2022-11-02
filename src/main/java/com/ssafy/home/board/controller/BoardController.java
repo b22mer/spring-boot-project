@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-/*https://goodteacher.tistory.com/351*/
 
 @Api(tags = {"board"})
 @Controller
