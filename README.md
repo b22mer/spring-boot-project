@@ -214,3 +214,15 @@ public class MemberInterceptor implements HandlerInterceptor {
 `MemberInterceptor`클래스에 HandlerInterceptor를 implements한다. 3가지의 메서드를 override할 수 있으며, controller의 메서드에 도달하기 전에 동작하는 `preHandler`를 사용한다. 
 session이 존재하면 session에서 로그인 시 저장된 member 객체를 얻어온다. member 객체가 존재하는 경우 request의 속성에 member를 추가해 준다. Controller에서는 HttpServletRequest에서 member 속성을 받아 현재 로그인된 사용자의 정보를 사용할 수 있다. 
 session이 존재하지 않거나 member 객체가 존재하지 않은 경우 로그인을 하도록 한다. 
+
+# WebCam
+![webcam](https://user-images.githubusercontent.com/55802893/199490364-1ae102a2-4123-4929-be1f-f4fe33ee86ea.png)
+
+- header 부분에 `#Selfie`를 클릭하게 되면 위와 같은 웹캡을 사용할 수 있는 모달창이 뜬다.
+
+# 아파트 실거래가 조회
+![](https://user-images.githubusercontent.com/55802893/199491055-b6898682-99cb-46b9-b4e1-41f4d543a991.png)
+
+- 시, 군구, 동, 년도, 월을 선택한 후 `매매정보가져오기`를 클릭하게 되면 아파트 실거래 정보를 얻을 수 있다.
+- 아파트 이름을 클릭하게 되면 해당 아파트의 좌표로 지도가 이동한다.
+- 
