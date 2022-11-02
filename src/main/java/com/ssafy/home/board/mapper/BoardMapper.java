@@ -12,4 +12,8 @@ public interface BoardMapper {
 
     void writeBoard(BoardDto board);
     void addFile(BoardDto boardDto);
+
+    BoardDto select(String code);
+
+    void update(BoardDto boardDto);
 }

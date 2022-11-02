@@ -29,7 +29,7 @@ create table if not exists SecurityVO
     );
 CREATE TABLE if not exists board
 (
-    `code`          int                 NOT NULL ,
+    `code`          varchar(50)         NOT NULL ,
     `article_no`     int                not null AUTO_INCREMENT,
     `groupOrd`      int                DEFAULT NULL,
     `groupLayer`    int                DEFAULT NULL,
