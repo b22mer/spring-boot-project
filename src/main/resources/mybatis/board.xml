@@ -34,6 +34,18 @@
         <result column="content_type" property="contentType"/>
     </resultMap>
 
+    <update id="update" parameterType="boardDto">
+        update
+        set title = #{title}, content=#{content}
+        where code = #{code};
+    </update>
+
+    <select id="select" parameterType="String" resultMap="article">
+        select *
+        from board
+        where code = #{code}
+    </select>
+
     <!--게시글 insert-->
     <insert id="writeBoard" parameterType="boardDto">
         insert into board (code, groupOrd, groupLayer, title, content, writer, hit, reg_datetime, id)

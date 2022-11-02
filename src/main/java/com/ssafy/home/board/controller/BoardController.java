@@ -11,8 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +28,39 @@ import java.util.*;
 public class BoardController {
     private final BoardService boardService; // 생성자 주입을 위한 처리
 
+    @PostMapping("update")
+    public String update(
+            HttpServletRequest req,
+            @ApiParam(value = "files")
+            @RequestParam MultipartFile[] files,
+            @ApiParam(value = "boardDto")
+            BoardDto boardDto
+    ) throws IOException {
+        BoardDto reqBoard = (BoardDto) req.getAttribute("detail");
+        reqBoard.setTitle(boardDto.getTitle());
+        reqBoard.setContent(boardDto.getContent());
+        List<FileDTO> list = new ArrayList<>();
+        for (MultipartFile file :
+                files) {
+            FileDTO dto = new FileDTO(
+                    UUID.randomUUID().toString(),
+                    file.getOriginalFilename(),
+                    file.getContentType());
+            list.add(dto);
+            File newFileName = new File(dto.getUuid() + "_" + dto.getFileName());
+            file.transferTo(newFileName);
+        }
+        boardDto.setFileInfos(list);
+        boardService.updateBoard(reqBoard);
+        return "board/list";
+    }
+
+    @GetMapping("detail/{code}")
+    public String detail(@PathVariable String code, HttpServletRequest req) {
+        BoardDto boardDto = boardService.select(code);
+        req.setAttribute("detail", boardDto);
+        return "board/detail";
+    }
 
     @GetMapping("upload")
     public String upload() {

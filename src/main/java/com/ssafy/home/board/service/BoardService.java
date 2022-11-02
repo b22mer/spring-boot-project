@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +26,17 @@ public class BoardService {
         if (list!=null && !list.isEmpty()){
             boardMapper.addFile(board);
         }
+        board.setCode(UUID.randomUUID().toString());
         System.out.println("file insert success");
         boardMapper.writeBoard(board);
         System.out.println("board insert success");
+    }
+
+    public BoardDto select(String code) {
+        return boardMapper.select(code);
+    }
+
+    public void updateBoard(BoardDto boardDto) {
+        boardMapper.update(boardDto);
     }
 }
