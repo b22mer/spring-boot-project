@@ -48,6 +48,7 @@ public class BoardController {
     ) throws IOException {
         Member member = (Member) req.getAttribute("member");
         boardDto.setId(member.getId());
+        boardDto.setWriter(member.getName());
         ResponseDTO res = new ResponseDTO();
         List<FileDTO> list = new ArrayList<>();
         for (MultipartFile file :

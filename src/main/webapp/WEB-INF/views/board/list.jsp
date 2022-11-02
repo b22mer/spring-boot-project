@@ -17,8 +17,8 @@
 <body>
 <%@include file="../common/header.jsp" %>
 
+<div><a href="${root}/board/upload">글 작성하기</a></div>
 <div id="boardListDiv" class="container mt-3"></div>
-<a href="writeBoardForm.html">글쓰기</a>
 
 </body>
 <script>
