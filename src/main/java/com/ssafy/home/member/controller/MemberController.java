@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -106,9 +108,12 @@ public class MemberController {
     @PostMapping("idchck")
     @ResponseBody
     public ResponseEntity<ResponseDTO> idCheck(
-            @ApiParam(value = "userId")
-            @RequestParam String userId) {
-        int isId = memberService.checkId(userId);
+            @ApiParam(value = "id")
+            @RequestBody Map<String, String> map) {
+    
+    	//System.out.println(map.get("id"));
+       int isId = memberService.checkId(map.get("id"));
+        
         ResponseDTO res = new ResponseDTO();
         if (isId > 0) {
             // id 존재
