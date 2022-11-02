@@ -28,16 +28,11 @@
                                 <li><a class="nav-link scrollto" href="${root}/board/deal">Deal Info</a></li>
                                 <li><a class="nav-link scrollto" href="/board/selectall">Board</a></li>
                     			<li><a class="nav-link scrollto" href="/user/logout">Logout</a></li>
-                    		<li><a class="nav-link scrollto" href="#">Setting</a></li>
-                                        <i class="bi bi-chevron-down"></i>
+                    	    <li><a class="nav-link scrollto" href="${root}/user/info"
+                           onclick="window.open(this.href, '_blank', 'width=600 height=800'); return false">info</a>
+                    		<li>
                     
-                            <li class="dropdown">
-                            <ul>
-                                <li><a href="#">modify</a></li>
-                                <li><a href="#">delete</a></li>
-                                <li><a href="#">search</a></li>
-                            </ul>
-                        </li>
+      
 
                 </c:if>
             </ul>

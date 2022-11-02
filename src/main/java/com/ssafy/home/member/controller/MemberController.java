@@ -27,15 +27,34 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("info")
-    @ResponseBody
-    public ResponseEntity<ResponseDTO> userInfo(HttpServletRequest req) {
-        Member member = (Member) req.getAttribute("member");
-        ResponseDTO res = new ResponseDTO();
-        res.setStatus("success");
-        res.setBody(member);
-        return new ResponseEntity<>(res, HttpStatus.OK);
+//    @GetMapping("info")
+//    @ResponseBody
+//    public ResponseEntity<ResponseDTO> userInfo(HttpServletRequest req) {
+//        Member member = (Member) req.getAttribute("member");
+//        ResponseDTO res = new ResponseDTO();
+//        res.setStatus("success");
+//        res.setBody(member);
+//        System.out.println(new ResponseEntity<>(res, HttpStatus.OK));
+//        return new ResponseEntity<>(res, HttpStatus.OK);
+//    }
+    
+
+    @DeleteMapping("delete")
+    public void delete(HttpServletRequest req) throws Exception {
+    	HttpSession session = req.getSession(false);
+    	if(session!=null) {
+    		Member m = (Member) session.getAttribute("member");
+        	memberService.delete(m);
+    		session.invalidate();
+    	}
+    	
     }
+    
+    @GetMapping("info")
+    public String userInfo() {
+    	 return "user/info";
+    }
+   
 
     @GetMapping("logout")
     public String logout(HttpServletRequest req) {
@@ -45,8 +64,7 @@ public class MemberController {
         }
 
         return "index";
-        
-        
+  
     }
 
     @GetMapping("/login")

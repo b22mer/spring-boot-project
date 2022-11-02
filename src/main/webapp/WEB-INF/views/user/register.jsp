@@ -73,6 +73,8 @@ document.querySelector("#registerBtn").addEventListener("click", async () => {
     data = await fetch("register", data);
     data = await data.text();
     alert(data);
+    
+    
 });
 
 

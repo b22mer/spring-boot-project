@@ -40,4 +40,12 @@
         from member
         where id = #{userId}
     </select>
+    
+      <!--user delete-->
+    
+    <delete id="userDelete"  parameterType="Member">
+    	delete
+    	from member 
+    	where id = #{id}
+    </delete>
 </mapper>

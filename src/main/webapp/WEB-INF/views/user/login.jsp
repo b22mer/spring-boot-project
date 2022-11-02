@@ -27,7 +27,7 @@
         </div>
     </div>
 </article>
-
-</body>
 <%@include file="../common/script.jsp" %>
+</body>
+
 </html>
