@@ -9,8 +9,6 @@
 | 로그인 / 로그아웃 페이지  |                                          |
 | 실거래가 검색, 결과 페이지 | 전체 검색 화면<br>상세 검색<br>동별 화면<br>아파트별 검색 화면 |
 
----
-
 # Where Is My Home
 
 ### Member
@@ -20,9 +18,7 @@
 |이상원|
 |정원철 |
 
-## 기본 구현기능
-
-### 1. 회원정보 관리
+## 1. 회원정보 관리
 
 - 회원정보 확인
 
@@ -54,27 +50,7 @@
   ![회원등록 완료 -8](https://user-images.githubusercontent.com/74225835/199534310-a9535ee6-73fc-44fb-85a5-e404df5df4f6.PNG)
   ![등록히 디비 -9](https://user-images.githubusercontent.com/74225835/199534321-c2c0a23a-8aa9-44b6-bafe-5421837da173.PNG)
 
-### 2. 메인페이지 (실거래 페이지)
-
-- 지도 api 연동
-
-        deal info 탭에 접속하게되면 카카오맵 연동을 통해 현재 임의로 설정해놓은 위도와 경도로를 기반으로 첫 뷰가 보이게된다.
-
-- 아파트 실거래가 검색
-
-        deal info page에서 시/도, 구/군, 동 그리고 날짜선택을 통하여 해당 선택에 부합하는 아파트의 실거래가 매매정보가 각 정보 Colunm에 맞게 리스트로 출력이된다. 상위 지역에서 존재하는 하위지역명이 각각 다르기에 이를 따로 설정해주어 지역을 고를때 구역을 나눠서 설정했다.
-
-### 3. 공지사항 (게시판 페이지)
-
-- 글 목록 확인
-
-        공지사항 페이지는 기본적으로 로그인상태에서 열람이 가능하다. 로그인이 되지 않은 상태에서는 Board탭이 활성화 되지 않고, 또한 주소로 강제로 이동을 한다고 하더라도 세션처리를 통하여 접속을 막는다. Board 탭에 접속하게되면 이전에 작성되었던 글들이 페이지 단위로 출력이된다. 각 페이지 넘버와 작성자 그리고 작성날짜가 출력되는데, 총 작성된 게시글의 수가 설정범위를 넘어가게되면 다음 페이지로 넘겨 출력하게된다.
-
-- 글 작성
-
-        글쓰기 버튼을 작성하게되면 제목과 내용 그리고 파일을 업로드할수있는 공란이 화면에 출력되게된다. 제목란과 글 내용란을 작성하고 파일업로드를 진행 후 확인을 누르게 되면 해당 글내용이 위 글 목록페이지에 표현된다.
-
-### 4. 생각해봐야할 기능
+## 2. 생각해봐야할 기능
 
 - 공지사항 글 작성관련 권한 설정방법
 
@@ -83,7 +59,7 @@
 
 ---
 
-## AOP를 사용해 예외처리 관리하기
+## 3. AOP를 사용해 예외처리 관리하기
 
 AOP는 관점지향 프로그래밍으로 로직을 기준으로 핵심 관점과 부과적인 관점으로 나눠서 보고 그 관점을 기준으로 각각을 모듈화 하는 것이다.
 
@@ -160,7 +136,7 @@ public class ErrorResponse {
 
 위 코드는 `GlobalExceptionHandler.java`에서 사용하는 `ErrorResponse` 객체이다.
 
-## BadSqlGrammarException
+### BadSqlGrammarException
 
 ```xml
 
@@ -192,7 +168,7 @@ ExceptionHandler에 예외 클래스를 정의해 준다. ErrorResponse 객체�
 postman으로 로그인 요청을 보낸 후 받은 응답 body이다. 요청에 대한 응답은 ErrorResponse 객체를 받은 것을 확인할 수 있다. errors와 code는 정의하지 않아 null로 반환되었다. 코드
 위쪽의 이미지에서 BadSqlGrammarException이 콘솔에 찍혀 있는것을 확인할 수 있다.
 
-## NullPointerException
+### NullPointerException
 
 다시 사용자 로그인을 사용해 NullPointerException을 발생시켜 본다. 위에서 로그인 쿼리는 다시 되돌려 놓는다. 이번에는 데이터베이스에 존재하지 않는 정보로 로그인을 시도한다.
 
@@ -218,7 +194,7 @@ ErrorResponse로 응답 객체를 만들고 ResponseEntity로 json 형태로 반
 
 에러의 메세지와 지정해준 상태 코드가 담겨 응답으로 반환된다. errors와 code 데이터는 추가하지 않아 null을 반환하게 된다.
 
-## Interceptor를 사용한 login required 구현
+## 4. Interceptor를 사용한 login required 구현
 
 웹 서비스의 사용자가 로그인이 되어 있는지 확인하기 위한 interceptor를 구현해 본다. client에서 요청된 url로 넘어가는 과정에서 조건을 충족하는지 확인하는 미들웨어 역할을 한다.
 
@@ -274,35 +250,55 @@ session이 존재하면 session에서 로그인 시 저장된 member 객체를 �
 HttpServletRequest에서 member 속성을 받아 현재 로그인된 사용자의 정보를 사용할 수 있다.
 session이 존재하지 않거나 member 객체가 존재하지 않은 경우 index 페이지로 redirect 하게 된다.
 
-# WebCam
+## 5. WebCam
 
 ![webcam](https://user-images.githubusercontent.com/55802893/199490364-1ae102a2-4123-4929-be1f-f4fe33ee86ea.png)
 
 - header 부분에 `#Selfie`를 클릭하게 되면 위와 같은 웹캡을 사용할 수 있는 모달창이 뜬다.
 
-# 아파트 실거래가 조회
+## 6. 아파트 실거래가 조회
+
+### 메인페이지 (실거래 페이지)
+
+- 지도 api 연동
+
+        deal info 탭에 접속하게되면 카카오맵 연동을 통해 현재 임의로 설정해놓은 위도와 경도로를 기반으로 첫 뷰가 보이게된다.
+
+- 아파트 실거래가 검색
+
+        deal info page에서 시/도, 구/군, 동 그리고 날짜선택을 통하여 해당 선택에 부합하는 아파트의 실거래가 매매정보가 각 정보 Colunm에 맞게 리스트로 출력이된다. 상위 지역에서 존재하는 하위지역명이 각각 다르기에 이를 따로 설정해주어 지역을 고를때 구역을 나눠서 설정했다.
 
 ![](https://user-images.githubusercontent.com/55802893/199491055-b6898682-99cb-46b9-b4e1-41f4d543a991.png)
 
 - 시, 군구, 동, 년도, 월을 선택한 후 `매매정보가져오기`를 클릭하게 되면 아파트 실거래 정보를 얻을 수 있다.
 - 아파트 이름을 클릭하게 되면 해당 아파트의 좌표로 지도가 이동한다.
 
-# 게시판
+## 7. 게시판
 
-## 게시판 목록 조회
+### 공지사항 (게시판 페이지)
+
+- 글 목록 확인
+
+        공지사항 페이지는 기본적으로 로그인상태에서 열람이 가능하다. 로그인이 되지 않은 상태에서는 Board탭이 활성화 되지 않고, 또한 주소로 강제로 이동을 한다고 하더라도 세션처리를 통하여 접속을 막는다. Board 탭에 접속하게되면 이전에 작성되었던 글들이 페이지 단위로 출력이된다. 각 페이지 넘버와 작성자 그리고 작성날짜가 출력되는데, 총 작성된 게시글의 수가 설정범위를 넘어가게되면 다음 페이지로 넘겨 출력하게된다.
+
+- 글 작성
+
+        글쓰기 버튼을 작성하게되면 제목과 내용 그리고 파일을 업로드할수있는 공란이 화면에 출력되게된다. 제목란과 글 내용란을 작성하고 파일업로드를 진행 후 확인을 누르게 되면 해당 글내용이 위 글 목록페이지에 표현된다.
+
+### 게시판 목록 조회
 
 ![](https://user-images.githubusercontent.com/55802893/199528095-162180ac-76ab-4b7b-8bdd-c5c9ec1549e1.png)
 
 - 사용자들이 작성한 게시판이다. 글을 조회할 때마다 글 번호인 index가 갱신되며 제목, 작성자, 작성 날짜가 보인다.
 
-## 게시글 작성하기
+### 게시글 작성하기
 
 ![](https://user-images.githubusercontent.com/55802893/199530508-c8eb62d1-ab49-4182-a4f1-d33bfb980e3f.png)
 ![스크린샷 2022-11-03 오전 12 29 57](https://user-images.githubusercontent.com/55802893/199531521-46fb6130-945e-47c0-a8bc-e007eb48ef47.png)
 
 - 게시글의 제목과 내용, 파일을 선택하고 제출을 누르면 게시글이 작성되고 파일은 `resources/static/files`에 저장된다.
 
-## 게시판 상세 보기
+### 게시판 상세 보기
 
 ![](https://user-images.githubusercontent.com/55802893/199528882-043a1e37-9c02-4f4c-87e0-858e69632633.png)
 
@@ -319,11 +315,11 @@ public String detail(@PathVariable String code,HttpServletRequest req){
 - @PathVariable 어노테이션으로 query string 값을 받아 올 수 있다.
 - 상세보기 페이지에서 내용을 수정한 뒤 `제출`을 누르게 되면 게시글의 정보가 수정된다.
 
-# Swagger API document
+## 8. Swagger API document
 
 swagger 3.0을 이용해서 API문서를 사용할 수 있다.
 
-## 의존성 추가
+### 의존성 추가
 
 ```xml
 
@@ -342,7 +338,7 @@ swagger 3.0을 이용해서 API문서를 사용할 수 있다.
 
 - springfox-boot-starter와 springfox-swagger-ui 3버전을 추가한다.
 
-## Swagger Configuration
+### Swagger Configuration
 
 ```java
 
@@ -362,7 +358,7 @@ public class SwaggerConfiguration {
 - Swagger 사용을 정의해 준다. @Configuration 어노테이션을 사용해 설정 파일임을 명시해 준다.
 - API 문서의 설명을 정의할 수 있다.
 
-## Controller에서 swagger 정의
+### Controller에서 swagger 정의
 
 ```java
 
@@ -404,7 +400,7 @@ public class MemberController {
 - Controller의 각 메서드에 @ApiResponses 어노테이션으로 응답에 대한 정보를 정의해 줄 수 있다.
 - 메서드의 파라미터에 @ApiParam()으로 파라미터 값의 정보를 명시해 줄 수 있다. 파라미터 타입이나 required 여부 등을 정의할 수 있다.
 
-## Swagger api 문서 보기
+### Swagger api 문서 보기
 
 ![스크린샷 2022-11-03 오전 1 03 54](https://user-images.githubusercontent.com/55802893/199540419-b8c69d32-1c47-4037-8555-a692f80d14d0.png)
 
@@ -413,7 +409,7 @@ public class MemberController {
 - 응답은 ResponseDTO 객체를 반환해 주는데 응답 예시를 알 수 있다.
 - 파라미터 정보와 응답 정보를 통해 어떤 데이터 형식으로 요청을하고 반환되는지 API 문서만 보고 이해할 수 있다.
 
-# 사용자 정보 암호화 하기
+## 9. 사용자 정보 암호화 하기
 
 암호화는 크게 양방향 암호화, 단방향 암호화가 있다. 양방향은 키를 이용한 복호화가 가능하다는 차이점이 있다.
 
@@ -555,7 +551,7 @@ pw encrypt: K;���a.�%�;�D���k-�N�-��<�K~��
 
 MessageDigest 클래스를 사용하여 인스턴스를 생성해 준다. 평문과 salt를 byte로 변환해 추가한다. 데이터베이스에 암호화된 byte 데이터가 저장된다.
 
-## 로그인 시 암호화된 비밀번호와 사용자 입력 비밀번호 확인
+#### 4) 로그인 시 암호화된 비밀번호와 사용자 입력 비밀번호 확인
 
 ```java
 public Member login(String id,String pw){
@@ -569,51 +565,51 @@ public Member login(String id,String pw){
 데이터베이스에 사용자 비밀번호는 해시 함수를 사용하여 암호화 되어 있다. 사용자가 정보를 변경하거나 어떤 동작에서 비밀번호를 입력 하는 행위가 필요한 경우 사용자가 입력한 비밀번호를 동일한 방식으로 해시화 해서
 데이터베이스에 저장된 값과 비교한다.
 
-# SQL Injection
+## 10. SQL Injection
 
 - SQL Injection은 악의적인 사용자가 보안상의 취약점을 이용해 임의의 sql 쿼리를 주입하여 실행하게 한다. 데이터베이스가 비 정상적으로 동작하도록 하는 것이 목적이다.
 
-## SQL Injection 대응 방안
+### SQL Injection 대응 방안
 
-### 입력 데이터 검증
+#### 입력 데이터 검증
 
 - 사용자가 입력한 값에 대해 검증
 - 서버에서 화이트리스트 기반으로 검증
 
-### Prepared Statement 구문 사용
+#### Prepared Statement 구문 사용
 
 - 사용자의 입력 값이 데이터베이스의 파라미터로 들어가기전에 DBMS가 미리 컴파일 하여 실행하지 않고 대기한다.
 - 이후 사용자의 입력 값을 문자열로 인식하여 들어가기 때문에 공격 쿼리가 포함되어 있어도 단순 문자열 형태로 공격을 할 수 없다
 - mybatis 를 사용하게되면 Prepared Statement를 사용하므로 대응 가능하다.
 
-### Error Message 숨기기
+#### Error Message 숨기기
 
 - 데이터베이스 요청 시 발생한 에러를 그대로 반환하게 되면, 테이블명, 컬럼명 등 공격자에게 그대로 노출이 되기 때문에 에러 발생 시 사용자에게 에러 페이지나 에러 메세지를 따로 보여준다.
 
-### 웹 방화벽 사용
+#### 웹 방화벽 사용
 
 - 소프트웨어와 하드웨어, 프록시로 세 가지 종류로 나눌 수 있다.
 - 소프트웨어 형은 서버 내에 직접 설치하는 방법이다.
 - 하드웨어 형은 네트워크 상에서 서버 앞 단에 직접 하드웨어 장비로 구성한다.
 - 프록시 형은 DNS 서버 주소를 웹 방화벽으로 바꾸고 서버로 가는 트래픽이 웹 방화벽을 먼저 거치도록 한다.
 
-# CSRF(Cross site request forgery)
+## 11. CSRF(Cross site request forgery)
 
 사이트 간 요청 위조는 공격자가 의도한 행위를 특정 웹 사이트에 사용자가 요청하게 하는 공격이다. 특정 웹 사이트가 사용자의 웹 브라우저를 신뢰하는 상태를 노린 공격이다.
 사용자가 웹 사이트에 로그인한 성태에서 사이트간 요청 위조 공격 코드가 삽입된 페이지를 열면, 공격 대상이 되는 웹 사이트는 위조된 공격 명령이 믿을 수 있는 사용자로부터 발송된 것으로 판단하여 공격에 노출된다.
 
-## CSRF 취약점 대응 방안
+### CSRF 취약점 대응 방안
 
-### Referer 검증
+#### Referer 검증
 
 - 백엔드에서 request의 referer를 확인해 도메인이 일치하는지 검증한다.
 
-### Security Token(CSRF Token)
+#### Security Token(CSRF Token)
 
 - 사용자의 세션에 임의의 난수 값을 저장하고, 사용자의 요청마다 해당 난수값을 포함시켜 전송한다.
 - 백엔드에서 요청을 받을 때마다 세션에 저장된 토큰 값과 요청 파라미터에서 전달되는 토큰값이 같은지 검증한다.
 
-### Double Submit Cookie 검증
+#### Double Submit Cookie 검증
 
 - 웹 브라우저의 same origin 정책으로 인해 자바스크립트에서 타 도메인의 쿠키값을 확인한다.
 - 스크립트에서 요청시 난수를 생성하여 쿠키에 저장되고, 동일한 난수 값을 요청 파라미터에 저장하여 서버에 전송한다.
