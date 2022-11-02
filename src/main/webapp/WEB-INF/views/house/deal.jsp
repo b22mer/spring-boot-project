@@ -12,7 +12,7 @@
 <%@include file="../common/header.jsp" %>
 
 <br>
-<h2>deal prototype</h2>
+<h2 class="text-center">Apartment Deal Info Search</h2>
 
 <!--1. 카카오맵 설정  -->
 <div class="container">
@@ -21,12 +21,8 @@
 
 
 <!--2. 거래가 정보 컨트롤  -->
-<div class="real-container">
-    <div class="container">
-
-        <h2 class="text-center mt-5 mb-3">Apartment Deal Info Search</h2>
-
-
+<div class="real-container mt-5 text-center">
+    <div class="container mb-5">
         <div class="row col-md-12 justify-content-center mb-2">
             <div class="form-group col-md-2">
                 <select class="form-select bg-secondary text-light" id="sido">
@@ -101,7 +97,7 @@
                 </button>
             </div>
         </div>
-        <table class="table table-hover text-center">
+        <table class="table table-hover text-center mb-5">
             <tr>
                 <th>아파트이름</th>
                 <th>층</th>

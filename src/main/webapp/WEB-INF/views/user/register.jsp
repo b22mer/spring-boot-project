@@ -55,61 +55,53 @@
 
 </article>
 <script>
-document.querySelector("#registerBtn").addEventListener("click", async () => {
-    let name = document.querySelector("#name").value;
-    let position = document.querySelector("#position").value;
-    let id = document.querySelector("#id").value;
-    let pw = document.querySelector("#pw").value;
-    let email = document.querySelector("#email").value;
-    let phoneNumber = document.querySelector("#phoneNumber").value;
+    document.querySelector("#registerBtn").addEventListener("click", async () => {
+        let name = document.querySelector("#name").value;
+        let position = document.querySelector("#position").value;
+        let id = document.querySelector("#id").value;
+        let pw = document.querySelector("#pw").value;
+        let email = document.querySelector("#email").value;
+        let phoneNumber = document.querySelector("#phoneNumber").value;
 
-    let data = {
-        method: "POST",
-        body: JSON.stringify({name, position, id, pw, email, phoneNumber}),
-        headers: {"Content-Type": "application/json"},
-    };
-    
-    
-
-    data = await fetch("register", data);
-    data = await data.text();
-    alert(data);
-    
-    
-});
+        let data = {
+            method: "POST",
+            body: JSON.stringify({name, position, id, pw, email, phoneNumber}),
+            headers: {"Content-Type": "application/json"},
+        };
 
 
+        data = await fetch("register", data);
+        data = await data.text();
+        alert(data);
+        window.close();
 
-document.querySelector("#checkIdBtn").addEventListener("click", async () => {
-    let id = document.querySelector("#id").value;
- 
-    let data = JSON.stringify({id});
- 
-	 
-    
-    data = await fetch("idchck", {
-        method: "POST",
-        body: data,
-        headers: {"Content-Type": "application/json"},
+
     });
-    
-    data = await data.text();
-    data = JSON.parse(data);
-    if (data.errMsg) {
-        alert(data.errMsg+"s");
-    } else {
-    	alert(data.Msg);
-    }
-});
 
-   
+
+    document.querySelector("#checkIdBtn").addEventListener("click", async () => {
+        let id = document.querySelector("#id").value;
+
+        let data = JSON.stringify({id});
+
+        data = await fetch("idchck", {
+            method: "POST",
+            body: data,
+            headers: {"Content-Type": "application/json"},
+        });
+
+        data = await data.text();
+        data = JSON.parse(data);
+        if (data.errMsg) {
+            alert(data.errMsg + "s");
+        } else {
+            alert(data.Msg);
+        }
+    });
+
+
 </script>
-	    
 
-	 
-	 
-	 
-	 
 
 </body>
 </html>

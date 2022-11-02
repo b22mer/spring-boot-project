@@ -44,6 +44,8 @@ CREATE TABLE if not exists board
     CONSTRAINT `board_to_member_id_fk`
     FOREIGN KEY (`id`)
     REFERENCES `ssafyweb`.`member` (`id`)
+    on delete cascade
+    on update cascade
     ) ENGINE = InnoDB
     AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8mb4

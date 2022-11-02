@@ -10,6 +10,7 @@
 <head>
     <title>Member Info</title>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <%@include file="../common/head.jsp" %>
 </head>
 <body>
@@ -79,7 +80,7 @@
         });
 
         alert("회원탈퇴가 완료되었습니다.");
-
+        opener.parent.location.reload();
         window.close();
 
     });
