@@ -12,8 +12,8 @@
                        onclick="window.open('webcam/cameraWeb.html', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=50,left=500,width=750,height=400');">#Selfie</a>
                 </li>
 
-                <li><a lass="nav-link scrollto" href="${root}/board/upload">files</a></li>
-                <li><a class="nav-link scrollto" href="${root}/board/deal">Deal Info</a></li>
+                <li><a class="nav-link scrollto" href="${root}/board/upload">files</a></li>
+                <li><a class="nav-link scrollto" href="${root}/house/deal">Deal Info</a></li>
                 <li><a class="nav-link scrollto" href="#portfolio">Company</a></li>
                 <c:if test="${member eq null  }">
                     <li><a class="nav-link scrollto" href="${root}/user/login"

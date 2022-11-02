@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ssafy.home.board.dto.BoardDto;
 import com.ssafy.home.board.dto.FileDTO;
-import com.ssafy.home.board.dto.WriteBoardDTO;
 import com.ssafy.home.board.service.BoardService;
 import com.ssafy.home.common.dto.ResponseDTO;
 import com.ssafy.home.member.dto.Member;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -33,16 +31,6 @@ import java.util.*;
 public class BoardController {
     private final BoardService boardService; // 생성자 주입을 위한 처리
 
-    
-    // 1101. deal 페이지 이동
-    @GetMapping("deal")
-    public String deal() {
-        return "board/deal";
-    }
-    
-    
-    
-    
 
     @GetMapping("upload")
     public String upload() {
